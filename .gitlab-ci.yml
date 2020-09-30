@@ -137,8 +137,11 @@ review:
   #except:
   #  - master
 
-performance:
-  dependencies:
-    - review
-  variables:
-    URL: environment_url.txt
+#performance:
+#  dependencies:
+#    - review
+#  variables:
+#    URL: environment_url.txt
+
+include:
+  - template: Code-Quality.gitlab-ci.yml
