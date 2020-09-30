@@ -33,6 +33,8 @@ variables:
 stages:
   - build
   - test
+  - deploy
+  - performance
 
 # ### Define global cache rule
 #
@@ -115,3 +117,28 @@ tests:
   # (e.g. integration tests, unit tests etc).
   script:
     - 'dotnet test --no-restore'
+
+include:
+  template: Verify/Browser-Performance.gitlab-ci.yml
+
+review:
+  stage: deploy
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: http://$CI_COMMIT_REF_SLUG.$APPS_DOMAIN
+  script:
+    - run_deploy_script
+    - echo $CI_ENVIRONMENT_URL > environment_url.txt
+  artifacts:
+    paths:
+      - environment_url.txt
+  only:
+    - branches
+  #except:
+  #  - master
+
+performance:
+  dependencies:
+    - review
+  variables:
+    URL: environment_url.txt
