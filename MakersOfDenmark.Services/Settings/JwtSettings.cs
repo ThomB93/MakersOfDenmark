@@ -1,5 +1,3 @@
-using System;
-
 namespace MakersOfDenmark.Services.Settings
 {
     public class JwtSettings
