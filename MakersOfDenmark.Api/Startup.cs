@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MakersOfDenmark.Core.Models.Auth;
+using MakersOfDenmark.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace MakersOfDenmark.Api
@@ -27,6 +24,13 @@ namespace MakersOfDenmark.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<MakersOfDenmarkDbContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("Default"),
+                x => x.MigrationsAssembly("MakersOfDenmark.Data")));
+            
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<MakersOfDenmarkDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MakersOfDenmarkApi", Version = "v1"});

@@ -25,4 +25,8 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MakersOfDenmark.Data\MakersOfDenmark.Data.csproj" />
+    </ItemGroup>
+
 </Project>

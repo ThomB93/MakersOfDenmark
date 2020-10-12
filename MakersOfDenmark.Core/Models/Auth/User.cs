@@ -1,11 +1,11 @@
 using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace MakersOfDenmark.Core.Models.Auth 
+namespace MakersOfDenmark.Core.Models.Auth
 {
-    public class User : IdentityUser<Guid> 
+    public class User : IdentityUser<Guid>
     {
-        public string FirstName {get; set;}
+        public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 }
