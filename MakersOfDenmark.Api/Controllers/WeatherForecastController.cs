@@ -22,6 +22,7 @@ namespace MakersOfDenmark.Api.Controllers
             _logger = logger;
         }
 
+        // Used as a Testing101 API test.
         [HttpGet]
         public string Get()
         {

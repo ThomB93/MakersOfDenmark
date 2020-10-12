@@ -25,24 +25,24 @@ namespace MakersOfDenmark.Tests
             _authservice = new AuthService(settings);
         }
         
-        [Fact]
-        public async Task GeneratedJwtIsValid()
-        {
-            // Input code to create unit-test here
-            var testUser = new User{
-                FirstName = "Test",
-                LastName = "Testesen",
-                Id = new Guid(),
-                UserName = "Test@testesen.dk",
-                Email = "Test@testesen.dk"
-            };
+        // [Fact]
+        // public async Task GeneratedJwtIsValid()
+        // {
+        //     // Input code to create unit-test here
+        //     var testUser = new User{
+        //         FirstName = "Test",
+        //         LastName = "Testesen",
+        //         Id = new Guid(),
+        //         UserName = "Test@testesen.dk",
+        //         Email = "Test@testesen.dk"
+        //     };
 
-            List<string> roles = new List<string>();
+        //     List<string> roles = new List<string>();
 
-            var result = _authservice.GenerateJwt(testUser, roles);
+        //     var result = _authservice.GenerateJwt(testUser, roles);
 
-            // Compare returned token with expected value
+        //     // Compare returned token with expected value
 
-        }
+        // }
     }
 }
