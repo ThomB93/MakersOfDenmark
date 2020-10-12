@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MakersOfDenmark.Data\MakersOfDenmark.Data.csproj" />
+      <ProjectReference Include="..\MakersOfDenmark.Services\MakersOfDenmark.Services.csproj" />
     </ItemGroup>
 
 </Project>
