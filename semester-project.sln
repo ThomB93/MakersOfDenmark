@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmarkApi", "MakersOfDenmarkApi\MakersOfDenmarkApi.csproj", "{C95517CB-C316-4B14-B6C4-1BC8DB831A8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Api", "MakersOfDenmark.Api\MakersOfDenmark.Api.csproj", "{C95517CB-C316-4B14-B6C4-1BC8DB831A8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmarkTests", "MakersOfDenmarkTests\MakersOfDenmarkTests.csproj", "{28F5616B-151E-4B17-A89A-C4FB975091B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Tests", "MakersOfDenmark.Tests\MakersOfDenmark.Tests.csproj", "{28F5616B-151E-4B17-A89A-C4FB975091B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
