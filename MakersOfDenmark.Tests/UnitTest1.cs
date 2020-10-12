@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using MakersOfDenmarkApi;
-using MakersOfDenmarkApi.Controllers;
+using MakersOfDenmark.Api;
+using MakersOfDenmark.Api.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace MakersOfDenmarkTests
+namespace MakersOfDenmark.Tests
 {
     public class UnitTest1
     {
