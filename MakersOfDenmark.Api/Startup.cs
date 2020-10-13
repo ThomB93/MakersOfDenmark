@@ -28,18 +28,18 @@ namespace MakersOfDenmark.Api
             services.AddDbContext<MakersOfDenmarkDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("Default"),
                 x => x.MigrationsAssembly("MakersOfDenmark.Data")));
-            
+
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<MakersOfDenmarkDbContext>()
                 .AddDefaultTokenProviders();
-            
-            services.AddTransient<AuthService>();
+
+            services.AddTransient<IAuthService, AuthService>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "MakersOfDenmarkApi", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MakersOfDenmarkApi", Version = "v1" });
             });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

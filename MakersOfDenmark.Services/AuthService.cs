@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MakersOfDenmark.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly JwtSettings _jwtSettings;
 
@@ -47,5 +47,6 @@ namespace MakersOfDenmark.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

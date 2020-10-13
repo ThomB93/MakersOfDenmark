@@ -15,15 +15,15 @@ namespace MakersOfDenmark.Api.Controllers
     public class AuthController : ControllerBase
     {
         // The Web API will only accept tokens 1) for users, and 2) having the "access_as_user" scope for this API
-        private static readonly string[] scopeRequiredByApi = {"access_as_user"};
+        private static readonly string[] scopeRequiredByApi = { "access_as_user" };
 
         private readonly ILogger<AuthController> _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthController(ILogger<AuthController> logger, IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager, AuthService authService)
+        public AuthController(ILogger<AuthController> logger, IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager, IAuthService authService)
         {
             _logger = logger;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace MakersOfDenmark.Api.Controllers
             _roleManager = roleManager;
             _authService = authService;
         }
-        
+
         [HttpGet]
         public string Get()
         {
@@ -39,13 +39,14 @@ namespace MakersOfDenmark.Api.Controllers
         }
 
         [HttpPost("SignUp")]
-        public async Task<IActionResult> SignUp(UserSignUpResource userSignUpResource) 
+        public async Task<IActionResult> SignUp(UserSignUpResource userSignUpResource)
         {
             var user = _mapper.Map<UserSignUpResource, User>(userSignUpResource);
 
             var userCreateResult = await _userManager.CreateAsync(user, userSignUpResource.Password);
 
-            if (userCreateResult.Succeeded) {
+            if (userCreateResult.Succeeded)
+            {
                 return Created(string.Empty, string.Empty);
             }
 
