@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MakersOfDenmark.Services;
+using AutoMapper;
 
 namespace MakersOfDenmark.Api
 {
@@ -39,7 +40,7 @@ namespace MakersOfDenmark.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MakersOfDenmarkApi", Version = "v1" });
             });
 
-
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
