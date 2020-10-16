@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MakersOfDenmark.Services;
 using AutoMapper;
+using MakersOfDenmark.Api.Extensions;
+using MakersOfDenmark.Services.Settings;
 
 namespace MakersOfDenmark.Api
 {
@@ -33,6 +35,9 @@ namespace MakersOfDenmark.Api
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<MakersOfDenmarkDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
+            services.AddAuth(Configuration.GetSection("Jwt").Get<JwtSettings>());
+            
             services.AddTransient<IAuthService, AuthService>();
 
             services.AddSwaggerGen(c =>
@@ -52,6 +57,7 @@ namespace MakersOfDenmark.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MakersOfDenmarkApi v1"));
             }
+            
 
             app.UseHttpsRedirection();
 

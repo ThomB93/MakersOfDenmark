@@ -30,7 +30,12 @@ namespace MakersOfDenmark.Tests
             // Mocking all the shit
             var loggerMock = new Mock<ILogger<AuthController>>();
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(x => x.Map<UserSignUpResource, User>(u => u.UserName, ));
+            mapperMock.Setup(x => x.Map<UserSignUpResource, User>(It.IsAny<UserSignUpResource>())).Returns(new User()
+            {
+                UserName = "test@testesen.dk",
+                Id = _userGuid,
+                PasswordHash = "1234Abc!"
+            });
             _userGuid = new Guid();
             var userStore = new Mock<IUserPasswordStore<User>>();
             userStore.Setup(x => x.FindByIdAsync(_userGuid.ToString(), CancellationToken.None))
@@ -41,7 +46,7 @@ namespace MakersOfDenmark.Tests
                     PasswordHash = "1234Abc!"
                 });
 
-            var userManagerMock = new UserManager<User>(userStore.Object, null, null, null, null, null, null, null, null);
+            //Mock<UserManager> userManagerMock = new Mock<UserManager>();
 
             var roleStore = new Mock<IRoleStore<Role>>();
             roleStore.Setup(x => x.FindByNameAsync("admin", CancellationToken.None))
@@ -53,7 +58,7 @@ namespace MakersOfDenmark.Tests
 
             var authServiceMock = new Mock<IAuthService>();
 
-            _controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock, roleManagerMock, authServiceMock.Object);
+            //_controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock, roleManagerMock, authServiceMock.Object);
         }
 
         [Fact]
