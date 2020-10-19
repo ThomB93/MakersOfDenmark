@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -72,6 +73,99 @@ namespace MakersOfDenmark.Api.Controllers
             }
 
             return BadRequest("Email or password is incorrect.");
+        }
+                
+        [HttpPost("Roles")]
+        public async Task<IActionResult> CreateRole(RoleResource roleResource)
+        {
+            if (string.IsNullOrWhiteSpace(roleResource.Name))
+            {
+                return BadRequest("Role name should be provided");
+            }
+            if (_roleManager.FindByNameAsync(roleResource.Name) != null)
+            {
+                return BadRequest("This role already exists");
+            }
+
+            var role = _mapper.Map<RoleResource, Role>(roleResource);
+
+            var result = await _roleManager.CreateAsync(role);
+
+            if (result.Succeeded)
+            {
+                return Created("roles",role);
+            }
+
+            return Problem(result.Errors.First().Description, null, 500);
+
+        }
+
+        
+        [HttpGet("GetRoleByName/{roleName}")]
+        public async Task<IActionResult> GetRoleByName(string roleName)
+        {
+            if (string.IsNullOrWhiteSpace(roleName))
+            {
+                return BadRequest("Role name should be provided");
+            }
+
+            var role = await _roleManager.FindByNameAsync(roleName);
+            if ( role == null)
+            {
+                return BadRequest("This role does not exist");
+            }
+
+            return Ok(role.Id);
+        }
+
+
+        
+        [HttpGet("GetRoleById/{roleId}")]
+        public async Task<IActionResult> GetRoleById(string roleId)
+        {
+            if (string.IsNullOrWhiteSpace(roleId))
+            {
+                return BadRequest("Role Id should be provided");
+            }
+
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                return BadRequest("This role does not exists");
+            }
+        
+            return Ok(role);
+        }
+        
+        
+        [HttpGet("GetAllRoles")]
+        public IEnumerable<Role> GetAllRoles()
+        {
+            var roles = _roleManager.Roles;
+            return roles;
+        }
+        
+        
+        
+        [HttpPost("AddRoleToUser/{userId}/{roleId}")]
+        public async Task<IActionResult> AddRoleToUser(string userId, string roleId)
+        {
+            if (string.IsNullOrWhiteSpace(roleId) || string.IsNullOrWhiteSpace(userId))
+            {
+                return BadRequest("User Id and Role Id should be provided");
+            }
+            
+            var user = await _userManager.FindByIdAsync(userId);
+            var role = await _roleManager.FindByIdAsync(roleId);
+            var result = await _userManager.AddToRoleAsync(user, role.Name);
+
+            if (result.Succeeded)
+            {
+                return Created(string.Empty, string.Empty);
+            }
+
+            return Problem(result.Errors.First().Description, null, 500);
         }
     }
 }
