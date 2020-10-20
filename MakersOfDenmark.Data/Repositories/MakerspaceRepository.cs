@@ -26,9 +26,18 @@ namespace MakersOfDenmark.Data.Repositories
             return MakersOfDenmarkDbContext.Makerspaces.ToList();
         }
 
-        public Makerspace GetMakerspaceById(int id)
+        public void Save(Makerspace makerspace)
         {
-            return MakersOfDenmarkDbContext.Makerspaces.FirstOrDefault(u => u.Id == id);
+            MakersOfDenmarkDbContext.Makerspaces.Add(makerspace);
+            MakersOfDenmarkDbContext.SaveChanges();
         }
+
+        public void Update(Makerspace makerspace)
+        {
+            MakersOfDenmarkDbContext.Makerspaces.Update(makerspace);
+            MakersOfDenmarkDbContext.SaveChanges();
+        }
+
+        
     }
 }
