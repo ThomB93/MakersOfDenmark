@@ -8,5 +8,7 @@ namespace MakersOfDenmark.Core.Repositories
     public interface IMakerspaceRepository
     {
         public IEnumerable<Makerspace> GetAllMakerspaces();
+        public void Save(Makerspace makerspace);
+        public void Update(Makerspace makerspace);
     }
 }
