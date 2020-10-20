@@ -23,7 +23,7 @@ namespace MakersOfDenmark.Tests.Authentication
             using (var context = new MakersOfDenmarkDbContext(options))
             {
                 context.Users.Add(makerspaceOwner);
-                context.Makerspaces.Add(new Makerspace {Id = 1, Owner = context.Users.FirstOrDefault()});
+                context.Makerspaces.Add(new Makerspace {Id = 1, userFK = context.Users.FirstOrDefault().Id});
                 context.SaveChanges();
             }
 
@@ -32,7 +32,7 @@ namespace MakersOfDenmark.Tests.Authentication
                 var repository = new MakerspaceRepository(context);
 
                 var makerspaceAdded = repository.GetMakerspaceById(1);
-                Assert.Equal(makerspaceAdded.Owner.Id, makerspaceOwner.Id);
+                Assert.Equal(makerspaceAdded.userFK, makerspaceOwner.Id);
             }
 
         }

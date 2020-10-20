@@ -11,6 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Json.Net" Version="1.0.23" />
         <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
