@@ -42,6 +42,5 @@ namespace MakersOfDenmark.Tests.Repositories
                 Assert.DoesNotContain(makerspaces, d => d.Id == 4);
             }
         }
-        
     }
 }
