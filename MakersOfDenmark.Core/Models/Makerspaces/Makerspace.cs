@@ -1,4 +1,6 @@
-﻿using MakersOfDenmark.Core.Models.Auth;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using MakersOfDenmark.Core.Models.Auth;
 
 namespace MakersOfDenmark.Core.Models.Makerspaces
 {
@@ -10,6 +12,7 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public string Access_Type { get; set; }
         public string CVR { get; set; }
         public string Logo_Url { get; set; }
-        public User Owner { get; set; }
+        [ForeignKey("UserId")]
+        public Guid userFK { get; set; }
     }
 }

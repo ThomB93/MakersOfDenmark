@@ -4,14 +4,16 @@ using MakersOfDenmark.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MakersOfDenmark.Data.Migrations
 {
     [DbContext(typeof(MakersOfDenmarkDbContext))]
-    partial class MakersOfDenmarkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201020101354_AddOwnerToMakerspace")]
+    partial class AddOwnerToMakerspace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,13 +173,15 @@ namespace MakersOfDenmark.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Space_Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("userFK")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Makerspaces");
                 });
@@ -288,6 +292,13 @@ namespace MakersOfDenmark.Data.Migrations
                     b.HasOne("MakersOfDenmark.Core.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+                });
+
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Makerspaces.Makerspace", b =>
+                {
+                    b.HasOne("MakersOfDenmark.Core.Models.Auth.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
