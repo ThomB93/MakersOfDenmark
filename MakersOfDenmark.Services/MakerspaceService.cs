@@ -16,12 +16,12 @@ namespace MakersOfDenmark.Services
         }
         public Task<IEnumerable<Makerspace>> GetAllMakerspaces()
         {
-            throw new System.NotImplementedException();
+            return _unitOfWork.Makerspaces.GetAllAsync();
         }
 
-        public Task<Makerspace> GetMakerspaceById(int id)
+        public async Task<Makerspace> GetMakerspaceById(int id)
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork.Makerspaces.GetByIdAsync(id);
         }
 
         public async Task<Makerspace> CreateMakerspace(Makerspace newMakerspace)
@@ -33,14 +33,22 @@ namespace MakersOfDenmark.Services
             return newMakerspace;
         }
 
-        public Task UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace)
+        public async Task UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace)
         {
-            throw new System.NotImplementedException();
+            makerspaceToBeUpdated.Name = makerspace.Name;
+            makerspaceToBeUpdated.Access_Type = makerspace.Access_Type;
+            makerspaceToBeUpdated.Logo_Url = makerspace.Logo_Url;
+            makerspaceToBeUpdated.Space_Type = makerspace.Space_Type;
+            makerspaceToBeUpdated.CVR = makerspace.CVR;
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task DeleteMakerspace(Makerspace makerspace)
+        public async Task DeleteMakerspace(Makerspace makerspaceToBeDeleted)
         {
-            throw new System.NotImplementedException();
+            _unitOfWork.Makerspaces.Remove(makerspaceToBeDeleted);
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }
