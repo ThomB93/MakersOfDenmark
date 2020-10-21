@@ -14,8 +14,9 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public string Logo_Url { get; set; }
         
         public User User { get; set; }
-        [ForeignKey("User")] 
-        public Guid UserFK { get; set; }
+        public Guid OwnerId { get; set; }
+        //[ForeignKey("User")] 
+        //public Guid UserFK { get; set; }
 
         
     }

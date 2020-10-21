@@ -13,5 +13,7 @@ namespace MakersOfDenmark.Core.Models
         public string Zipcode { get; set; }
         [MaxLength(2)]
         public string CountryCode { get; set; }
+        
+        //TODO: Add properties  for user collection
     }
 }

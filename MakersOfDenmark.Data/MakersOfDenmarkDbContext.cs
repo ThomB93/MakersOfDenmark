@@ -2,6 +2,7 @@
 using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Makerspaces;
+using MakersOfDenmark.Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,10 @@ namespace MakersOfDenmark.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //custom configurations
+            builder
+                .ApplyConfiguration(new MakerspaceConfiguration());
+            
             base.OnModelCreating(builder);
             
         }

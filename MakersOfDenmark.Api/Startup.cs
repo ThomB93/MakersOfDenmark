@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using MakersOfDenmark.Services;
 using AutoMapper;
 using MakersOfDenmark.Api.Extensions;
+using MakersOfDenmark.Core;
+using MakersOfDenmark.Core.Services;
 using MakersOfDenmark.Services.Settings;
 
 namespace MakersOfDenmark.Api
@@ -38,7 +40,10 @@ namespace MakersOfDenmark.Api
             services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
             services.AddAuth(Configuration.GetSection("Jwt").Get<JwtSettings>());
             
+            //Add dependency injections
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IMakerspaceService, MakerspaceService>();
 
             services.AddSwaggerGen(c =>
             {
