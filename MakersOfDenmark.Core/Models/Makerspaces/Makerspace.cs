@@ -12,7 +12,11 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public string Access_Type { get; set; }
         public string CVR { get; set; }
         public string Logo_Url { get; set; }
-        [ForeignKey("UserId")]
-        public Guid userFK { get; set; }
+        
+        public User User { get; set; }
+        [ForeignKey("User")] 
+        public Guid UserFK { get; set; }
+
+        
     }
 }
