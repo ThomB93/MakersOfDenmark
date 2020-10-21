@@ -66,7 +66,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Access_Type = "Access",
                 CVR = "12345678",
                 Logo_Url = "public/test.png",
-                userFK = user.Id
+                UserFK = user.Id
             };
 
             //act
@@ -89,7 +89,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Assert.Equal(makerspace.Access_Type, storedmakerspaces.Access_Type);
                 Assert.Equal(makerspace.CVR, storedmakerspaces.CVR);
                 Assert.Equal(makerspace.Logo_Url, storedmakerspaces.Logo_Url);
-                Assert.Equal(makerspace.userFK, storedmakerspaces.userFK);
+                Assert.Equal(makerspace.UserFK, storedmakerspaces.UserFK);
                 
                 
             }
@@ -115,7 +115,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Access_Type = "Public",
                 CVR = "12345678",
                 Logo_Url = "public/test.png",
-                userFK = user.Id
+                UserFK = user.Id
             };
             
             using (var context = new MakersOfDenmarkDbContext(options))
@@ -149,7 +149,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Assert.Equal(makerspace.Access_Type, storedmakerspaces.Access_Type);
                 Assert.Equal(makerspace.CVR, storedmakerspaces.CVR);
                 Assert.Equal(makerspace.Logo_Url, storedmakerspaces.Logo_Url);
-                Assert.Equal(makerspace.userFK, storedmakerspaces.userFK);
+                Assert.Equal(makerspace.UserFK, storedmakerspaces.UserFK);
             }
         }
 
@@ -174,7 +174,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Access_Type = "Public",
                 CVR = "12345678",
                 Logo_Url = "public/test.png",
-                userFK = user.Id
+                UserFK = user.Id
             };
             
             using (var context = new MakersOfDenmarkDbContext(options))
@@ -218,7 +218,7 @@ namespace MakersOfDenmark.Tests.Repositories
                 Access_Type = "Public",
                 CVR = "12345678",
                 Logo_Url = "public/test.png",
-                userFK = user.Id
+                UserFK = user.Id
             };
             
             using (var context = new MakersOfDenmarkDbContext(options))
