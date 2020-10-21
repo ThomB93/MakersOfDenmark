@@ -202,7 +202,7 @@ namespace MakersOfDenmark.Tests.Repositories
         public void GetMakerspaceById()
         {
             var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldDeleteTheMakerspace").Options;
+                .UseInMemoryDatabase(databaseName: "ShouldGetMakerspaceById").Options;
             
             var user = new User
             {

@@ -54,15 +54,16 @@ namespace MakersOfDenmark.Tests
             {
                 Name = "admin"
             });
-            var roleManagerMock = new RoleManager<Role>(roleStore.Object, null, null, null, null);
-
+            var roleManagerMock = new Mock<RoleManager<Role>>();
+            var userManagerMock = new Mock<UserManager<User>>();
             var authServiceMock = new Mock<IAuthService>();
-
-            //_controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock, roleManagerMock, authServiceMock.Object);
+            
+            //produces an error
+            _controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock.Object, roleManagerMock.Object, authServiceMock.Object);
         }
 
         [Fact]
-        public async void UserCreatedSuccessfully()
+        public async void UserShouldBeCreatedSuccessfullyFromUserResource()
         {
             // Arrange
             UserSignUpResource userSignUpResource = new UserSignUpResource
