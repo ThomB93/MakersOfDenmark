@@ -6,8 +6,8 @@ namespace MakersOfDenmark.Core.Services
 {
     public interface IMakerspaceService
     {
-        Task<IEnumerable<Makerspace>> GetAllMakerspaces();
-        Task<Makerspace> GetMakerspaceById(int id);
+        Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner();
+        Task<Makerspace> GetMakerspaceWithOwnerById(int id);
         Task<Makerspace> CreateMakerspace(Makerspace newMakerspace);
         Task UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace);
         Task DeleteMakerspace(Makerspace makerspace);

@@ -6,6 +6,7 @@ using MakersOfDenmark.Core.Services;
 
 namespace MakersOfDenmark.Services
 {
+    //Wraps the repository actions inside unit of work wrappers (transactions)
     public class MakerspaceService : IMakerspaceService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -14,14 +15,14 @@ namespace MakersOfDenmark.Services
         {
             this._unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<Makerspace>> GetAllMakerspaces()
+        public Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner()
         {
-            return _unitOfWork.Makerspaces.GetAllAsync();
+            return _unitOfWork.Makerspaces.GetAllMakerspacesWithOwner();
         }
 
-        public async Task<Makerspace> GetMakerspaceById(int id)
+        public async Task<Makerspace> GetMakerspaceWithOwnerById(int id)
         {
-            return await _unitOfWork.Makerspaces.GetByIdAsync(id);
+            return await _unitOfWork.Makerspaces.GetMakerspaceWithOwnerById(id);
         }
 
         public async Task<Makerspace> CreateMakerspace(Makerspace newMakerspace)
