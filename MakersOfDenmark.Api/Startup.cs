@@ -30,7 +30,7 @@ namespace MakersOfDenmark.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<MakersOfDenmarkDbContext>(options => options.UseSqlServer(
+            services.AddDbContext<MakersOfDenmarkDbContext>(options => options.UseNpgsql(
                 Configuration.GetConnectionString("Default"),
                 x => x.MigrationsAssembly("MakersOfDenmark.Data")));
 
