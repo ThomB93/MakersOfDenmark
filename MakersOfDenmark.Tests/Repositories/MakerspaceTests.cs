@@ -3,9 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MakersOfDenmark.Core;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Makerspaces;
+using MakersOfDenmark.Core.Repositories;
+using MakersOfDenmark.Core.Services;
 using MakersOfDenmark.Data.Repositories;
+using MakersOfDenmark.Services;
+using Moq;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -13,28 +18,37 @@ namespace MakersOfDenmark.Tests.Repositories
 {
     public class MakerspaceTests
     {
+
+        
+        //private IMakerspaceService _makerspaceService;
+
+        public MakerspaceTests()
+        {
+            
+        }
+        
         [Fact]
-        public void ShouldGetAll()
+        public async void ShouldGetAll()
         {
             // Arrange
-            var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldReturnAllMakerspaces").Options;
-
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                context.Makerspaces.Add(new Makerspace {Id = 1});
-                context.Makerspaces.Add(new Makerspace {Id = 2});
-                context.Makerspaces.Add(new Makerspace {Id = 3});
-                
-                context.SaveChanges();
-            }
             
-            using (var context = new MakersOfDenmarkDbContext(options))
+            List<Makerspace> dummydata = new List<Makerspace>()
             {
-                var repository = new MakerspaceRepository(context);
+                new Makerspace() { Id = 1, OwnerId = new Guid()},
+                new Makerspace() { Id = 2, OwnerId = new Guid()},
+                new Makerspace() { Id = 3, OwnerId = new Guid()}
+            };
+            var mockMakerspaceRepository = new Mock<IMakerspaceRepository>();
+            mockMakerspaceRepository.Setup(ms => ms.GetAllMakerspacesWithOwner())
+                .ReturnsAsync(dummydata);
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(_ => _.Makerspaces).
+                Returns(mockMakerspaceRepository.Object);
+            MakerspaceService makerspaceService = new MakerspaceService(mockUnitOfWork.Object);
+                
 
                 // Act
-                var makerspaces = repository.GetAllMakerspaces();
+                var makerspaces = await makerspaceService.GetAllMakerspacesWithOwner();
 
                 // Assert
                 Assert.Equal(3, makerspaces.Count());
@@ -42,203 +56,103 @@ namespace MakersOfDenmark.Tests.Repositories
                 Assert.Contains(makerspaces, d => d.Id == 2);
                 Assert.Contains(makerspaces, d => d.Id == 3);
                 Assert.DoesNotContain(makerspaces, d => d.Id == 4);
-            }
+            
         }
         
         [Fact]
         public void ShouldSaveTheMakerspace()
         {
-            //arrange
-            var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldSaveTheMakerspace").Options;
-
-            var user = new User
-            {
-                FirstName = "Test",
-                LastName = "Test"
-            };
+            Makerspace DummyMakerspace = new Makerspace();
             
-            var makerspace = new Makerspace
-            {
-                Id = 1, 
-                Name = "Test",
-                Space_Type = "Test",
-                Access_Type = "Access",
-                CVR = "12345678",
-                Logo_Url = "public/test.png",
-                UserFK = user.Id
-            };
+            var mockMakerspaceRepository = new Mock<IMakerspaceRepository>();
+            mockMakerspaceRepository.Setup(ms => ms.AddAsync(It.IsAny<Makerspace>()));
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(_ => _.Makerspaces).
+                Returns(mockMakerspaceRepository.Object);
+            MakerspaceService makerspaceService = new MakerspaceService(mockUnitOfWork.Object);
 
             //act
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Save(makerspace);
-            }
+            makerspaceService.CreateMakerspace(DummyMakerspace);
             
-            //assert
-
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var makerspaces = context.Makerspaces.ToList();
-                var storedmakerspaces = Assert.Single(makerspaces);
-                
-                Assert.Equal(makerspace.Id, storedmakerspaces.Id);
-                Assert.Equal(makerspace.Name, storedmakerspaces.Name);
-                Assert.Equal(makerspace.Space_Type, storedmakerspaces.Space_Type);
-                Assert.Equal(makerspace.Access_Type, storedmakerspaces.Access_Type);
-                Assert.Equal(makerspace.CVR, storedmakerspaces.CVR);
-                Assert.Equal(makerspace.Logo_Url, storedmakerspaces.Logo_Url);
-                Assert.Equal(makerspace.UserFK, storedmakerspaces.UserFK);
-                
-                
-            }
+            mockMakerspaceRepository.Verify(_ => _.AddAsync(It.IsAny<Makerspace>()), Times.Once);
         }
         [Fact]
         public void ShouldUpdateMakerSpace()
         {
-            //arrange
-            var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldUpdateTheMakerspace").Options;
+            var mockMakerspaceRepository = new Mock<IMakerspaceRepository>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(_ => _.Makerspaces).
+                Returns(mockMakerspaceRepository.Object);
+            MakerspaceService makerspaceService = new MakerspaceService(mockUnitOfWork.Object);
             
-            var user = new User
+            Makerspace ToBeUpdated = new Makerspace()
             {
-                FirstName = "Test",
-                LastName = "Test"
-            };
-            
-            var makerspace = new Makerspace
-            {
-                Id = 1, 
                 Name = "Test",
-                Space_Type = "Test",
                 Access_Type = "Public",
-                CVR = "12345678",
-                Logo_Url = "public/test.png",
-                UserFK = user.Id
+                Logo_Url = "html",
+                Space_Type = "laser cutter",
+                CVR = "12345678"
             };
-            
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Save(makerspace);
-            }
-            //act
-            makerspace.Name = "test 2";
-            makerspace.Space_Type = "Test 2";
-            makerspace.Access_Type = "Private";
-            makerspace.CVR = "87654321";
-            makerspace.Logo_Url = "public/tree.png";
-            
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Update(makerspace);
-            }
-            
-            //assert
 
-            using (var context = new MakersOfDenmarkDbContext(options))
+            Makerspace newMakerspace = new Makerspace()
             {
-                var makerspaces = context.Makerspaces.ToList();
-                var storedmakerspaces = Assert.Single(makerspaces);
-                
-                Assert.Equal(makerspace.Id, storedmakerspaces.Id);
-                Assert.Equal(makerspace.Name, storedmakerspaces.Name);
-                Assert.Equal(makerspace.Space_Type, storedmakerspaces.Space_Type);
-                Assert.Equal(makerspace.Access_Type, storedmakerspaces.Access_Type);
-                Assert.Equal(makerspace.CVR, storedmakerspaces.CVR);
-                Assert.Equal(makerspace.Logo_Url, storedmakerspaces.Logo_Url);
-                Assert.Equal(makerspace.UserFK, storedmakerspaces.UserFK);
-            }
+                Name = "123",
+                Access_Type = "private",
+                Logo_Url = "test",
+                Space_Type = "Changed",
+                CVR = "87654321"
+            };
+
+            makerspaceService.UpdateMakerspace(ToBeUpdated, newMakerspace);
+            
+            mockUnitOfWork.Verify(_ => _.CommitAsync(), Times.Once);
+
         }
 
         [Fact]
         public void DeleteMakerspace()
         {
             //arrange
-            var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldDeleteTheMakerspace").Options;
             
-            var user = new User
-            {
-                FirstName = "Test",
-                LastName = "Test"
-            };
+            var mockMakerspaceRepository = new Mock<IMakerspaceRepository>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
             
-            var makerspace = new Makerspace
-            {
-                Id = 1, 
-                Name = "Test",
-                Space_Type = "Test",
-                Access_Type = "Public",
-                CVR = "12345678",
-                Logo_Url = "public/test.png",
-                UserFK = user.Id
-            };
+            mockMakerspaceRepository.Setup(ms => ms.Remove(It.IsAny<Makerspace>()));
+            mockUnitOfWork.Setup(_ => _.Makerspaces).
+                Returns(mockMakerspaceRepository.Object);
+            MakerspaceService makerspaceService = new MakerspaceService(mockUnitOfWork.Object);
+
+            makerspaceService.DeleteMakerspace(new Makerspace());
             
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Save(makerspace);
-            }
-            
-            //act
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Delete(makerspace.Id);
-            }
-            
-            //Assert
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var makerspaces = context.Makerspaces.ToList();
-                Assert.Empty(makerspaces);
-            }
+            mockUnitOfWork.Verify(_ => _.CommitAsync(), Times.Once);
+            mockMakerspaceRepository.Verify(_ => _.Remove(It.IsAny<Makerspace>()),Times.Once);
+
+
+
         }
 
         [Fact]
-        public void GetMakerspaceById()
+        public async void GetMakerspaceById()
         {
-            var options = new DbContextOptionsBuilder<MakersOfDenmarkDbContext>()
-                .UseInMemoryDatabase(databaseName: "ShouldGetMakerspaceById").Options;
-            
-            var user = new User
-            {
-                FirstName = "Test",
-                LastName = "Test"
-            };
-            
-            var makerspace = new Makerspace
+            var mockMakerspaceRepository = new Mock<IMakerspaceRepository>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            Guid guid = new Guid();
+            Makerspace mks = new Makerspace()
             {
                 Id = 1, 
-                Name = "Test",
-                Space_Type = "Test",
-                Access_Type = "Public",
-                CVR = "12345678",
-                Logo_Url = "public/test.png",
-                UserFK = user.Id
+                OwnerId = guid,
+                
             };
             
-            using (var context = new MakersOfDenmarkDbContext(options))
-            {
-                var repository = new MakerspaceRepository(context);
-                repository.Save(makerspace);
-            }
-            
-            //act 
+            mockMakerspaceRepository.Setup(ms => ms.GetMakerspaceWithOwnerById(It.IsAny<int>()))
+                .ReturnsAsync(mks);
+            mockUnitOfWork.Setup(_ => _.Makerspaces).
+                Returns(mockMakerspaceRepository.Object);
+            MakerspaceService makerspaceService = new MakerspaceService(mockUnitOfWork.Object);
 
-            var dbcontext = new MakersOfDenmarkDbContext(options);
+            var res = await makerspaceService.GetMakerspaceWithOwnerById(1);
             
-            var makerspacerepository = new MakerspaceRepository(dbcontext);
-            Makerspace storedMakerspace = makerspacerepository.FindById(makerspace.Id);
-            //assert
-            string makerspaceOutput = JsonConvert.SerializeObject(makerspace);
-            string storedMakerspaceOutput = JsonConvert.SerializeObject(storedMakerspace);
-            
-            Assert.Equal(makerspaceOutput, storedMakerspaceOutput);
-
+            Assert.Equal(mks, res);
         }
 
     }
