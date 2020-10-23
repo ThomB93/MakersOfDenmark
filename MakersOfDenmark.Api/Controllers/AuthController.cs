@@ -146,6 +146,34 @@ namespace MakersOfDenmark.Api.Controllers
             return roles;
         }
         
+
+        [HttpGet("GetAllUsers")]
+        public IEnumerable<User> GetAllUsers()
+        {
+            var users = _userManager.Users;
+            return users;
+        }
+
+        [HttpDelete("DeleteUser/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return BadRequest("Wrong user id provided.");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            
+            var result = await _userManager.DeleteAsync(user);
+            
+            if (result.Succeeded){ 
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
         
         
         [HttpPost("AddRoleToUser/{userId}/{roleId}")]
