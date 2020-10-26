@@ -28,5 +28,13 @@ namespace MakersOfDenmark.Api.Controllers
         {
             return "Hello World!";
         }
+
+
+        // Used as pipeline test
+        [HttpGet("/azure")]
+        public string Get(){
+            return "Hello Azure";
+        }
+
     }
 }
