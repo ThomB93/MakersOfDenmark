@@ -48,8 +48,18 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-- task: AzureWebApp@1
+# - task: AzureWebApp@1
+#   inputs:
+#     azureSubscription: 'Test service connection RM'
+#     appName: 'thomasTestSemesterprojekt'
+#     package: $(Build.ArtifactStagingDirectory)/*.zip
+
+- task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Test service connection RM'
-    appName: 'thomasTestSemesterprojekt'
-    package: $(Build.ArtifactStagingDirectory)/*.zip
+    appType: 'webApp'
+    WebAppName: 'thomasTestSemesterprojekt'
+    packageForLinux: '$(Build.BinariesDirectory)'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
