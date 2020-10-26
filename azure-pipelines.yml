@@ -44,4 +44,4 @@ steps:
   inputs:
     azureSubscription: 'Test service connection RM'
     appName: 'thomasTestSemesterprojekt'
-    package: $(System.DefaultWorkingDirectory)/**/*.zip
+    package: $(Build.ArtifactStagingDirectory)/*.zip
