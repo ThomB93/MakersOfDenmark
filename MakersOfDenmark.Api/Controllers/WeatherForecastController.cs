@@ -31,10 +31,11 @@ namespace MakersOfDenmark.Api.Controllers
 
 
         // Used as pipeline test
-        [HttpGet("/azure")]
-        public string Get(){
+        [HttpGet]
+        [Route("/{s}")]
+        public string Get(string s)
+        {
             return "Hello Azure";
         }
-
     }
 }
