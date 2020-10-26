@@ -35,6 +35,6 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'Test service connection'
+    azureSubscription: 'Test service connection RM'
     appName: 'thomasTestSemesterprojekt'
     package: $(System.DefaultWorkingDirectory)/**/*.zip
