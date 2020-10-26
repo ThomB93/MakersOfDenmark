@@ -48,27 +48,13 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-# - task: AzureWebApp@1
-#   inputs:
-#     azureSubscription: 'Test service connection RM'
-#     appName: 'thomasTestSemesterprojekt'
-#     package: $(Build.ArtifactStagingDirectory)/*.zip
-
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'Test service connection RM'
-#     appType: 'webApp'
-#     WebAppName: 'thomasTestSemesterprojekt'
-#     packageForLinux: '$(Build.BinariesDirectory)'
-#     enableCustomDeployment: true
-#     DeploymentType: 'webDeploy'
-#     AdditionalArguments: 
-
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Test service connection RM'
+    azureSubscription: 'Azure for Students(d880816e-0a76-42b7-a75b-6577422d0815)'
     appType: 'webApp'
     WebAppName: 'thomasTestSemesterprojekt'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/MakersOfDenmark.Api.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
+    TakeAppOfflineFlag: false
