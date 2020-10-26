@@ -29,13 +29,5 @@ namespace MakersOfDenmark.Api.Controllers
             return "Hello World!";
         }
 
-
-        // Used as pipeline test
-        [HttpGet]
-        [Route("/{s}")]
-        public string Get(string s)
-        {
-            return "Hello Azure";
-        }
     }
 }
