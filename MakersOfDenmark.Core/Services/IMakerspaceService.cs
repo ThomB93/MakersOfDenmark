@@ -9,7 +9,7 @@ namespace MakersOfDenmark.Core.Services
         Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner();
         Task<Makerspace> GetMakerspaceWithOwnerById(int id);
         Task<Makerspace> CreateMakerspace(Makerspace newMakerspace);
-        Task UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace);
-        Task DeleteMakerspace(Makerspace makerspace);
+        Task<Makerspace> UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace);
+        Task<Makerspace> DeleteMakerspace(Makerspace makerspace);
     }
 }
