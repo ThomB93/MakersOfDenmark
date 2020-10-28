@@ -34,22 +34,27 @@ namespace MakersOfDenmark.Services
             return newMakerspace;
         }
 
-        public async Task UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace)
+        public async Task<Makerspace> UpdateMakerspace(Makerspace makerspaceToBeUpdated, Makerspace makerspace)
         {
             makerspaceToBeUpdated.Name = makerspace.Name;
             makerspaceToBeUpdated.Access_Type = makerspace.Access_Type;
             makerspaceToBeUpdated.Logo_Url = makerspace.Logo_Url;
             makerspaceToBeUpdated.Space_Type = makerspace.Space_Type;
             makerspaceToBeUpdated.CVR = makerspace.CVR;
+            //TODO: Add updates for new properties
 
             await _unitOfWork.CommitAsync();
+            
+            return makerspaceToBeUpdated;
         }
 
-        public async Task DeleteMakerspace(Makerspace makerspaceToBeDeleted)
+        public async Task<Makerspace> DeleteMakerspace(Makerspace makerspaceToBeDeleted)
         {
             _unitOfWork.Makerspaces.Remove(makerspaceToBeDeleted);
 
             await _unitOfWork.CommitAsync();
+
+            return makerspaceToBeDeleted;
         }
     }
 }
