@@ -3,15 +3,17 @@ using System;
 using MakersOfDenmark.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MakersOfDenmark.Data.Migrations
 {
     [DbContext(typeof(MakersOfDenmarkDbContext))]
-    partial class MakersOfDenmarkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201030090157_badges")]
+    partial class badges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,21 +224,6 @@ namespace MakersOfDenmark.Data.Migrations
                     b.ToTable("MakerspaceBadges");
                 });
 
-            modelBuilder.Entity("MakersOfDenmark.Core.Models.UserRelations.UserBadge", b =>
-                {
-                    b.Property<int>("BadgeId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("BadgeId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserBadges");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -367,21 +354,6 @@ namespace MakersOfDenmark.Data.Migrations
                     b.HasOne("MakersOfDenmark.Core.Models.Makerspaces.Makerspace", "Makerspaces")
                         .WithMany("MakerspaceBadges")
                         .HasForeignKey("MakerspaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MakersOfDenmark.Core.Models.UserRelations.UserBadge", b =>
-                {
-                    b.HasOne("MakersOfDenmark.Core.Models.Badges.Badge", "Badge")
-                        .WithMany("UserBadges")
-                        .HasForeignKey("BadgeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MakersOfDenmark.Core.Models.Auth.User", "User")
-                        .WithMany("UserBadges")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
