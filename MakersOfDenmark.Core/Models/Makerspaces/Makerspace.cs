@@ -20,6 +20,10 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
         public IList<Badge> Badges { get; set; }
+
+        public int AddressId { get; set; }
+
+        public Address Address { get; set; }
         //[ForeignKey("User")] 
         //public Guid UserFK { get; set; }
 

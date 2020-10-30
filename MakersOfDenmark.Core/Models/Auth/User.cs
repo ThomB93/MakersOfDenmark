@@ -26,5 +26,8 @@ namespace MakersOfDenmark.Core.Models.Auth
         public ICollection<Makerspace> MakerspacesJoined { get; set; }
         
         public IList<UserBadge> UserBadges { get; set; }
+
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
     }
 }
