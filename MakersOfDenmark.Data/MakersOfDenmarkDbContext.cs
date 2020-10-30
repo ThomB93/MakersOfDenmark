@@ -35,6 +35,9 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new MakerspaceBadgeConfiguration());
 
             builder
+                .ApplyConfiguration(new UserConfiguration());
+            
+            builder
                 .ApplyConfiguration(new UserBadgeConfiguration());
             
             
