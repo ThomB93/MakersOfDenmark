@@ -16,15 +16,11 @@ namespace MakersOfDenmark.Data.Configurations
                 .UseIdentityColumn();
 
             //TODO: Add configuration for further constraints
-            
-            /*builder
-                .Property(m => m.Name)
-                .IsRequired();*/
-            
-            builder
-                .HasOne(m => m.User)
-                .WithMany(u => u.MakerspacesJoined)
-                .HasForeignKey(m => m.OwnerId);
+            builder.Property(m => m.Name).IsRequired().HasMaxLength(200);
+            builder.Property(m => m.Access_Type).IsRequired();
+            builder.Property(m => m.Description).HasMaxLength(1000);
+            builder.Property(m => m.OwnerId).IsRequired();
+            builder.Property(m => m.CVR).HasMaxLength(8);
 
             builder
                 .HasOne(mb => mb.Address)

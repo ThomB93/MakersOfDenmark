@@ -18,6 +18,7 @@ namespace MakersOfDenmark.Data
         public DbSet<Badge> Badges { get; set; }
         public DbSet<MakerspaceBadge> MakerspaceBadges { get; set; }
         public DbSet<UserBadge> UserBadges { get; set; }
+        public DbSet<MakerspaceUser> MakerspaceUsers { get; set; }
         
         public MakersOfDenmarkDbContext(DbContextOptions<MakersOfDenmarkDbContext> options)
             : base(options)
@@ -33,13 +34,13 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new BadgeConfiguration());
             builder
                 .ApplyConfiguration(new MakerspaceBadgeConfiguration());
-
             builder
                 .ApplyConfiguration(new UserConfiguration());
+            builder
+                .ApplyConfiguration(new MakerspaceUserConfiguration());
             
             builder
                 .ApplyConfiguration(new UserBadgeConfiguration());
-            
             
             base.OnModelCreating(builder);
             

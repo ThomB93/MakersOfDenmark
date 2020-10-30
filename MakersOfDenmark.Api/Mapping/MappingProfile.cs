@@ -1,6 +1,7 @@
 using AutoMapper;
 using MakersOfDenmark.Api.Resources;
 using MakersOfDenmark.Core;
+using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Makerspaces;
 
@@ -20,5 +21,6 @@ public class MappingProfile : Profile
             CreateMap<Makerspace, MakerspaceResource>();
             CreateMap<Makerspace, SaveMakerspaceResource>();
             CreateMap<User, UserResource>();
+            CreateMap<Address, AddressResource>();
         }
     }

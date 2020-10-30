@@ -14,11 +14,15 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public string Access_Type { get; set; }
         public string CVR { get; set; }
         public string Logo_Url { get; set; }
-        
+        public string Description { get; set; }
+        public string X_Coords { get; set; }
+        public string Y_Coords { get; set; }
+
         public User User { get; set; }
         public Guid OwnerId { get; set; }
         
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
+        public IList<MakerspaceUser> MakerspaceUsers { get; set; }
         public IList<Badge> Badges { get; set; }
 
         public int AddressId { get; set; }

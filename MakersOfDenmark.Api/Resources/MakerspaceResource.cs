@@ -10,6 +10,11 @@ namespace MakersOfDenmark.Api.Resources
         public string Access_Type { get; set; }
         public string CVR { get; set; }
         public string Logo_Url { get; set; }
+        public string Description { get; set; }
+        public string X_Coords { get; set; }
+        public string Y_Coords { get; set; }
         public UserResource User { get; set; }
+        public AddressResource Address { get; set; }
+        
     }
 }
