@@ -3,9 +3,11 @@ using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
 using MakersOfDenmark.Core.Models.Makerspaces;
+using MakersOfDenmark.Core.Models.UserRelations;
 using MakersOfDenmark.Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MakersOfDenmark.Data
 {
@@ -15,6 +17,8 @@ namespace MakersOfDenmark.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Badge> Badges { get; set; }
         public DbSet<MakerspaceBadge> MakerspaceBadges { get; set; }
+        public DbSet<UserBadge> UserBadges { get; set; }
+        
         public MakersOfDenmarkDbContext(DbContextOptions<MakersOfDenmarkDbContext> options)
             : base(options)
         {
@@ -29,10 +33,15 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new BadgeConfiguration());
             builder
                 .ApplyConfiguration(new MakerspaceBadgeConfiguration());
+
+            builder
+                .ApplyConfiguration(new UserBadgeConfiguration());
             
             
             base.OnModelCreating(builder);
             
         }
     }
+
+    
 }
