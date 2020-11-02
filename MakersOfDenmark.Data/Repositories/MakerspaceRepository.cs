@@ -25,12 +25,14 @@ namespace MakersOfDenmark.Data.Repositories
         {
             return await MakersOfDenmarkDbContext.Makerspaces
                 .Include(m => m.User)
+                .Include(m => m.Address)
                 .ToListAsync();
         }
         public async Task<Makerspace> GetMakerspaceWithOwnerById(int id)
         {
             return await MakersOfDenmarkDbContext.Makerspaces
                 .Include(m => m.User)
+                .Include(m => m.Address)
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
         
