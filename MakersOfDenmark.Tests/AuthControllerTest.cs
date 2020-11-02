@@ -16,6 +16,7 @@ using System.Threading;
 using MakersOfDenmark.Api.Resources;
 using MakersOfDenmark.Api.Controllers;
 using AutoMapper;
+using MakersOfDenmark.Core.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace MakersOfDenmark.Tests

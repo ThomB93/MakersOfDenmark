@@ -24,18 +24,31 @@ namespace MakersOfDenmark.Data.Repositories
         public async Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner()
         {
             return await MakersOfDenmarkDbContext.Makerspaces
-                .Include(m => m.User)
+                .Include(m => m.Owner)
                 .Include(m => m.Address)
-                .ToListAsync();
+                .Include(m => m.MakerspaceBadges).ThenInclude(b => b.Badge).ToListAsync();
         }
         public async Task<Makerspace> GetMakerspaceWithOwnerById(int id)
         {
             return await MakersOfDenmarkDbContext.Makerspaces
-                .Include(m => m.User)
+                .Include(m => m.Owner)
                 .Include(m => m.Address)
+                
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
         
+        /*var query = context.Customers
+            .Join(
+                context.Invoices,
+                customer => customer.CustomerId,
+                invoice => invoice.Customer.CustomerId,
+                (customer, invoice) => new
+                {
+                    InvoiceID = invoice.Id,
+                    CustomerName = customer.FirstName + "" + customer.LastName,
+                    InvoiceDate = invoice.Date
+                }
+            ).ToList();*/
         
         //Standard repository functionality does not need to be overwritten
 

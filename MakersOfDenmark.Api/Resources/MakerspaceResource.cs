@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using MakersOfDenmark.Core.Models.Auth;
+using MakersOfDenmark.Core.Models.Badges;
 
 namespace MakersOfDenmark.Api.Resources
 {
@@ -13,8 +16,9 @@ namespace MakersOfDenmark.Api.Resources
         public string Description { get; set; }
         public string X_Coords { get; set; }
         public string Y_Coords { get; set; }
-        public UserResource User { get; set; }
+        public UserResource Owner { get; set; }
         public AddressResource Address { get; set; }
-        
+        public IList<BadgeResource> MakerspaceBadges { get; set; }
+        public IList<UserResource> MakerspaceUsers { get; set; }
     }
 }

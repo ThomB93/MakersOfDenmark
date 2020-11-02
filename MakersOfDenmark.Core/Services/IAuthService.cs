@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MakersOfDenmark.Core.Models.Auth;
 
-namespace MakersOfDenmark.Services
+namespace MakersOfDenmark.Core.Services
 {
     public interface IAuthService
     {
