@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using MakersOfDenmark.Core.Models.Auth;
+using MakersOfDenmark.Core.Services;
 using MakersOfDenmark.Services.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

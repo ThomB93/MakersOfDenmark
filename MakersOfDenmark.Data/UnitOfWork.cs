@@ -10,17 +10,22 @@ namespace MakersOfDenmark.Data
     {
         private readonly MakersOfDenmarkDbContext _context;
         private MakerspaceRepository Makerspaces { get; set; }
+        private BadgeRepository Badges { get; set; }
         
         public UnitOfWork(MakersOfDenmarkDbContext context)
         {
             this._context = context;
             this.Makerspaces = new MakerspaceRepository(context);
+            this.Badges = new BadgeRepository(context);
         }
-
 
         IMakerspaceRepository IUnitOfWork.Makerspaces
         {
             get => Makerspaces;
+        }
+        IBadgeRepository IUnitOfWork.Badges
+        {
+            get => Badges;
         }
 
         public async Task<int> CommitAsync()

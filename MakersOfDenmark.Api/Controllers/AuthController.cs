@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MakersOfDenmark.Api.Resources;
 using MakersOfDenmark.Core.Models.Auth;
+using MakersOfDenmark.Core.Services;
 using MakersOfDenmark.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

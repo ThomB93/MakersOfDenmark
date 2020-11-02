@@ -18,7 +18,7 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public string X_Coords { get; set; }
         public string Y_Coords { get; set; }
 
-        public User User { get; set; }
+        public User Owner { get; set; }
         public Guid OwnerId { get; set; }
         
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
