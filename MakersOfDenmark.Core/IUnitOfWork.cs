@@ -9,6 +9,8 @@ namespace MakersOfDenmark.Core
     {
         IMakerspaceRepository Makerspaces { get; }
         IBadgeRepository Badges { get; }
+        IEventRepository Events { get; }
+        IUserRepository Users { get;}
         Task<int> CommitAsync();
     }
 }

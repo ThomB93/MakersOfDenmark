@@ -2,6 +2,7 @@
 using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
+using MakersOfDenmark.Core.Models.Events;
 using MakersOfDenmark.Core.Models.Makerspaces;
 using MakersOfDenmark.Core.Models.UserRelations;
 using MakersOfDenmark.Data.Configurations;
@@ -19,7 +20,10 @@ namespace MakersOfDenmark.Data
         public DbSet<MakerspaceBadge> MakerspaceBadges { get; set; }
         public DbSet<UserBadge> UserBadges { get; set; }
         public DbSet<MakerspaceUser> MakerspaceUsers { get; set; }
-        
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventRegistration> EventRegistrations { get; set; }
+        public DbSet<EventBadge> EventBadges { get; set; }
+
         public MakersOfDenmarkDbContext(DbContextOptions<MakersOfDenmarkDbContext> options)
             : base(options)
         {
@@ -38,14 +42,17 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new UserConfiguration());
             builder
                 .ApplyConfiguration(new MakerspaceUserConfiguration());
-            
             builder
                 .ApplyConfiguration(new UserBadgeConfiguration());
-            
+            builder
+                .ApplyConfiguration(new EventConfiguration());
+            builder
+                .ApplyConfiguration(new EventBadgeConfiguration());
+
             base.OnModelCreating(builder);
-            
+
         }
     }
 
-    
+
 }

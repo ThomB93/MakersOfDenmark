@@ -68,7 +68,7 @@ namespace MakersOfDenmark.Api.Controllers
             
             var makerspace = _mapper.Map<SaveMakerspaceResource, Makerspace>(saveMakerspaceResource);
 
-            await _makerspaceService.UpdateMakerspace(makerspaceToBeUpdated, makerspace );
+            await _makerspaceService.UpdateMakerspace(makerspaceToBeUpdated, makerspace);
 
             var updatedMakerspace = await _makerspaceService.GetMakerspaceWithOwnerById(id);
             var updatedMakerspaceResource = _mapper.Map<Makerspace, SaveMakerspaceResource>(updatedMakerspace);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MakersOfDenmark.Core.Models.Events;
 using MakersOfDenmark.Core.Models.Makerspaces;
 using MakersOfDenmark.Core.Models.UserRelations;
 
@@ -18,6 +19,7 @@ namespace MakersOfDenmark.Core.Models.Badges
         public Makerspace Issuer { get; set; }
         
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
+        public IList<EventBadge> EventBadges { get; set; }
         
         public IList<UserBadge> UserBadges { get; set; }
     }

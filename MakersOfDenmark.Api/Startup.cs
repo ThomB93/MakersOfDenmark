@@ -44,6 +44,8 @@ namespace MakersOfDenmark.Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IMakerspaceService, MakerspaceService>();
+            services.AddTransient<IBadgeService, BadgeService>();
+            services.AddTransient<IEventService, EventService>();
 
             services.AddSwaggerGen(c =>
             {
