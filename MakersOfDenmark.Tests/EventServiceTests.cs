@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MakersOfDenmark.Tests.Repositories
+namespace MakersOfDenmark.Tests
 {
     class EventTests
     {
+        
     }
 }

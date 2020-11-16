@@ -16,7 +16,7 @@ using Moq;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace MakersOfDenmark.Tests.Repositories
+namespace MakersOfDenmark.Tests
 {
     public class MakerspaceTests
     {
