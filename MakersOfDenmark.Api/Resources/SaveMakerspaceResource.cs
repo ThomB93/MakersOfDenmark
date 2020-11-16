@@ -14,6 +14,6 @@ namespace MakersOfDenmark.Api.Resources
         public string X_Coords { get; set; }
         public string Y_Coords { get; set; }
         public Guid OwnerId { get; set; }
-        public AddressResource Address { get; set; }
+        public SaveAddressResource Address { get; set; }
     }
 }
