@@ -13,5 +13,9 @@ namespace MakersOfDenmark.Core.Services
         Task<bool> SignUpForEvent(Guid userId, int eventId);
         Task<bool> CancelEventSignUp(Guid userId, int eventId);
         Task<Event> UpdateEvent(Event eventToBeUpdated, Event updatedEvent);
+        public IEnumerable<Event> UpcomingEvents();
+        public Task<IEnumerable<Event>> UpcomingEventsForUser(Guid userId);
+        public IEnumerable<Event> HistoricEvents();
+        public Task<IEnumerable<Event>> HistoricEventsUserAttended(Guid userId);
     }
 }

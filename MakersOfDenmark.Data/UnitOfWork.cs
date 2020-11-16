@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MakersOfDenmark.Core;
-using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Repositories;
-using MakersOfDenmark.Core.Services;
 using MakersOfDenmark.Data.Repositories;
 
 namespace MakersOfDenmark.Data
@@ -10,37 +8,28 @@ namespace MakersOfDenmark.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly MakersOfDenmarkDbContext _context;
-        private MakerspaceRepository Makerspaces { get; set; }
-        private BadgeRepository Badges { get; set; }
-        private EventRepository Events { get; set; }
-        private UserRepository Users { get; set; }
+
         public UnitOfWork(MakersOfDenmarkDbContext context)
         {
-            this._context = context;
-            this.Makerspaces = new MakerspaceRepository(context);
-            this.Badges = new BadgeRepository(context);
-            this.Events = new EventRepository(context);
-            this.Users = new UserRepository(context);
+            _context = context;
+            Makerspaces = new MakerspaceRepository(context);
+            Badges = new BadgeRepository(context);
+            Events = new EventRepository(context);
+            Users = new UserRepository(context);
         }
 
-        IMakerspaceRepository IUnitOfWork.Makerspaces
-        {
-            get => Makerspaces;
-        }
-        IBadgeRepository IUnitOfWork.Badges
-        {
-            get => Badges;
-        }
+        private MakerspaceRepository Makerspaces { get; }
+        private BadgeRepository Badges { get; }
+        private EventRepository Events { get; }
+        private UserRepository Users { get; }
 
-        IEventRepository IUnitOfWork.Events
-        {
-            get => Events;
-        }
+        IMakerspaceRepository IUnitOfWork.Makerspaces => Makerspaces;
 
-        IUserRepository IUnitOfWork.Users
-        {
-            get => Users;
-        }
+        IBadgeRepository IUnitOfWork.Badges => Badges;
+
+        IEventRepository IUnitOfWork.Events => Events;
+
+        IUserRepository IUnitOfWork.Users => Users;
 
         public async Task<int> CommitAsync()
         {
