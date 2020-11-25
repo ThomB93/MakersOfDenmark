@@ -179,6 +179,77 @@ namespace MakersOfDenmark.Data.Migrations
                     b.ToTable("Badges");
                 });
 
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("character varying(280)")
+                        .HasMaxLength(280);
+
+                    b.Property<DateTime>("EndDateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("MakerspaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MakerspaceId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.EventBadge", b =>
+                {
+                    b.Property<int>("BadgeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("BadgeId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventBadges");
+                });
+
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.EventRegistration", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateOfRegistration")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("HasAttended")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("UserId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventRegistrations");
+                });
+
             modelBuilder.Entity("MakersOfDenmark.Core.Models.Makerspaces.Makerspace", b =>
                 {
                     b.Property<int>("Id")
@@ -215,9 +286,6 @@ namespace MakersOfDenmark.Data.Migrations
                     b.Property<string>("Space_Type")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("X_Coords")
                         .HasColumnType("text");
 
@@ -228,7 +296,7 @@ namespace MakersOfDenmark.Data.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Makerspaces");
                 });
@@ -397,6 +465,45 @@ namespace MakersOfDenmark.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.Event", b =>
+                {
+                    b.HasOne("MakersOfDenmark.Core.Models.Makerspaces.Makerspace", "MakerspaceHost")
+                        .WithMany("Events")
+                        .HasForeignKey("MakerspaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.EventBadge", b =>
+                {
+                    b.HasOne("MakersOfDenmark.Core.Models.Badges.Badge", "Badge")
+                        .WithMany("EventBadges")
+                        .HasForeignKey("BadgeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MakersOfDenmark.Core.Models.Events.Event", "Event")
+                        .WithMany("EventBadges")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MakersOfDenmark.Core.Models.Events.EventRegistration", b =>
+                {
+                    b.HasOne("MakersOfDenmark.Core.Models.Events.Event", "Event")
+                        .WithMany("RegisteredUsers")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MakersOfDenmark.Core.Models.Auth.User", "User")
+                        .WithMany("EventsRegisteredFor")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MakersOfDenmark.Core.Models.Makerspaces.Makerspace", b =>
                 {
                     b.HasOne("MakersOfDenmark.Core.Models.Address", "Address")
@@ -405,9 +512,11 @@ namespace MakersOfDenmark.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MakersOfDenmark.Core.Models.Auth.User", "User")
+                    b.HasOne("MakersOfDenmark.Core.Models.Auth.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MakersOfDenmark.Core.Models.Makerspaces.MakerspaceBadge", b =>
