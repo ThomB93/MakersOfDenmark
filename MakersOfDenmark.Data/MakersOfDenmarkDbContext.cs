@@ -48,6 +48,8 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new EventConfiguration());
             builder
                 .ApplyConfiguration(new EventBadgeConfiguration());
+            builder
+                .ApplyConfiguration(new EventRegistrationConfiguration());
 
             base.OnModelCreating(builder);
 
