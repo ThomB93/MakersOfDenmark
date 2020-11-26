@@ -46,7 +46,7 @@ namespace MakersOfDenmark.Api.Controllers
             return Ok(eventResources);
         }
         
-        [HttpGet("getHistoricEvents")]
+        [HttpGet("historic")]
         public ActionResult<IEnumerable<EventResource>> GetHistoricEvents()
         {
             var events = _eventService.HistoricEvents();
@@ -62,7 +62,20 @@ namespace MakersOfDenmark.Api.Controllers
             return Ok(eventResource);
         }
         
-        //TODO: Delete event
+        [HttpDelete("{eventId}")]
+        public async Task<ActionResult> DeleteEvent(int eventId)
+        {
+            if (eventId == 0)
+                return BadRequest();
+
+            var eventToDelete = await _eventService.GetEvent(eventId);
+            if (eventToDelete == null)
+                return NotFound();
+
+            await _eventService.DeleteEvent(eventToDelete);
+
+            return NoContent();
+        }
         
         //TODO: Sign Up For Event
         
@@ -76,9 +89,8 @@ namespace MakersOfDenmark.Api.Controllers
             var eventToBeUpdated = await _eventService.GetEvent(id);
 
             if (eventToBeUpdated == null)
-            {
                 return NotFound();
-            }
+            
             
             var eventFound = _mapper.Map<SaveEventResource, Event>(saveEventResource);
 
@@ -89,8 +101,15 @@ namespace MakersOfDenmark.Api.Controllers
             
             return Ok(updatedEventResource);
         }
-
-        //TODO: Add get upcoming Events
+        
+        [HttpGet("upcoming")]
+        public ActionResult<IEnumerable<Event>> UpcomingEvents()
+        {
+            var eventFound = _eventService.UpcomingEvents();
+            var eventResource = _mapper.Map<IEnumerable<Event>, IEnumerable<EventResource>>(eventFound);
+            return Ok(eventResource);
+        }
+        
         
         //TODO: Add get signedUp upcoming Events
         
