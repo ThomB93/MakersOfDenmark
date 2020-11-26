@@ -118,5 +118,15 @@ namespace MakersOfDenmark.Services
 
             return eventRegistrationsFound.Select(eventRegistration => eventRegistration.Event).ToList();
         }
+
+        public async Task<IEnumerable<Event>> GetEvents()
+        {
+            return await _unitOfWork.Events.GetAllAsync();
+        }
+
+        public async Task<Event> GetEvent(int eventId)
+        {
+            return await _unitOfWork.Events.GetByIdAsync(eventId);
+        }
     }
 }

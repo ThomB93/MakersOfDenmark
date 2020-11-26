@@ -17,5 +17,8 @@ namespace MakersOfDenmark.Core.Services
         public Task<IEnumerable<Event>> UpcomingEventsForUser(Guid userId);
         public IEnumerable<Event> HistoricEvents();
         public Task<IEnumerable<Event>> HistoricEventsUserAttended(Guid userId);
+        public Task<IEnumerable<Event>> GetEvents();
+
+        public Task<Event> GetEvent(int eventId);
     }
 }
