@@ -1,5 +1,4 @@
 ﻿using System;
-using MakersOfDenmark.Core.Models;
 
 namespace MakersOfDenmark.Api.Resources
 {

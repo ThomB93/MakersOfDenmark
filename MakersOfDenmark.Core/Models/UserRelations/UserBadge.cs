@@ -1,7 +1,6 @@
 ﻿using System;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
-using MakersOfDenmark.Core.Models.Makerspaces;
 
 namespace MakersOfDenmark.Core.Models.UserRelations
 {

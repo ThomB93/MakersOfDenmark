@@ -5,14 +5,10 @@ namespace MakersOfDenmark.Data.Repositories
 {
     public class BadgeRepository : Repository<Badge>, IBadgeRepository
     {
-        private MakersOfDenmarkDbContext MakersOfDenmarkDbContext
-        {
-            get { return Context as MakersOfDenmarkDbContext; }
-        }
-        
         public BadgeRepository(MakersOfDenmarkDbContext context) : base(context)
         {
-            
         }
+
+        private MakersOfDenmarkDbContext MakersOfDenmarkDbContext => Context as MakersOfDenmarkDbContext;
     }
 }

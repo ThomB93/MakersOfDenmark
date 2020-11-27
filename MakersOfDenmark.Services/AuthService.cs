@@ -39,8 +39,8 @@ namespace MakersOfDenmark.Services
             var expires = DateTime.Now.AddDays(Convert.ToDouble(_jwtSettings.ExpirationInDays));
 
             var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
-                audience: _jwtSettings.Issuer,
+                _jwtSettings.Issuer,
+                _jwtSettings.Issuer,
                 claims,
                 expires: expires,
                 signingCredentials: creds
@@ -48,6 +48,5 @@ namespace MakersOfDenmark.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
     }
 }

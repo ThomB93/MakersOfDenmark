@@ -1,6 +1,5 @@
 using AutoMapper;
 using MakersOfDenmark.Api.Resources;
-using MakersOfDenmark.Core;
 using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
@@ -34,4 +33,3 @@ namespace MakersOfDenmark.Api.Mapping
         }
     }
 }
-

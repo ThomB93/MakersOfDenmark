@@ -9,39 +9,34 @@ namespace MakersOfDenmark.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
+                "Addresses",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StreetName = table.Column<string>(nullable: true),
                     StreetNumber = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Zipcode = table.Column<string>(nullable: true),
                     CountryCode = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Addresses", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
+                "AspNetRoles",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_AspNetRoles", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
+                "AspNetUsers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
@@ -66,19 +61,20 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
+                        "FK_AspNetUsers_Addresses_AddressId",
+                        x => x.AddressId,
+                        "Addresses",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
+                "AspNetRoleClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -87,19 +83,20 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        x => x.RoleId,
+                        "AspNetRoles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
+                "AspNetUserClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -108,16 +105,16 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
+                "AspNetUserLogins",
+                table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
@@ -126,42 +123,42 @@ namespace MakersOfDenmark.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
+                "AspNetUserRoles",
+                table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     RoleId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        x => x.RoleId,
+                        "AspNetRoles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
+                "AspNetUserTokens",
+                table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
@@ -170,21 +167,22 @@ namespace MakersOfDenmark.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Makerspaces",
-                columns: table => new
+                "Makerspaces",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     Space_Type = table.Column<string>(nullable: true),
                     Access_Type = table.Column<string>(nullable: false),
@@ -200,25 +198,26 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_Makerspaces", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Makerspaces_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
+                        "FK_Makerspaces_Addresses_AddressId",
+                        x => x.AddressId,
+                        "Addresses",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Makerspaces_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_Makerspaces_AspNetUsers_OwnerId",
+                        x => x.OwnerId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Badges",
-                columns: table => new
+                "Badges",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Description = table.Column<string>(maxLength: 280, nullable: true),
                     Image = table.Column<string>(nullable: false),
@@ -228,19 +227,20 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_Badges", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Badges_Makerspaces_IssuerId",
-                        column: x => x.IssuerId,
-                        principalTable: "Makerspaces",
-                        principalColumn: "Id",
+                        "FK_Badges_Makerspaces_IssuerId",
+                        x => x.IssuerId,
+                        "Makerspaces",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
+                "Events",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StartDateTime = table.Column<DateTime>(nullable: false),
                     EndDateTime = table.Column<DateTime>(nullable: false),
                     Deadline = table.Column<DateTime>(nullable: false),
@@ -252,112 +252,112 @@ namespace MakersOfDenmark.Data.Migrations
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Events_Makerspaces_MakerspaceId",
-                        column: x => x.MakerspaceId,
-                        principalTable: "Makerspaces",
-                        principalColumn: "Id",
+                        "FK_Events_Makerspaces_MakerspaceId",
+                        x => x.MakerspaceId,
+                        "Makerspaces",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MakerspaceUsers",
-                columns: table => new
+                "MakerspaceUsers",
+                table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     MakerspaceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MakerspaceUsers", x => new { x.UserId, x.MakerspaceId });
+                    table.PrimaryKey("PK_MakerspaceUsers", x => new {x.UserId, x.MakerspaceId});
                     table.ForeignKey(
-                        name: "FK_MakerspaceUsers_Makerspaces_MakerspaceId",
-                        column: x => x.MakerspaceId,
-                        principalTable: "Makerspaces",
-                        principalColumn: "Id",
+                        "FK_MakerspaceUsers_Makerspaces_MakerspaceId",
+                        x => x.MakerspaceId,
+                        "Makerspaces",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MakerspaceUsers_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_MakerspaceUsers_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MakerspaceBadges",
-                columns: table => new
+                "MakerspaceBadges",
+                table => new
                 {
                     BadgeId = table.Column<int>(nullable: false),
                     MakerspaceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MakerspaceBadges", x => new { x.BadgeId, x.MakerspaceId });
+                    table.PrimaryKey("PK_MakerspaceBadges", x => new {x.BadgeId, x.MakerspaceId});
                     table.ForeignKey(
-                        name: "FK_MakerspaceBadges_Badges_BadgeId",
-                        column: x => x.BadgeId,
-                        principalTable: "Badges",
-                        principalColumn: "Id",
+                        "FK_MakerspaceBadges_Badges_BadgeId",
+                        x => x.BadgeId,
+                        "Badges",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MakerspaceBadges_Makerspaces_MakerspaceId",
-                        column: x => x.MakerspaceId,
-                        principalTable: "Makerspaces",
-                        principalColumn: "Id",
+                        "FK_MakerspaceBadges_Makerspaces_MakerspaceId",
+                        x => x.MakerspaceId,
+                        "Makerspaces",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserBadges",
-                columns: table => new
+                "UserBadges",
+                table => new
                 {
                     BadgeId = table.Column<int>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserBadges", x => new { x.BadgeId, x.UserId });
+                    table.PrimaryKey("PK_UserBadges", x => new {x.BadgeId, x.UserId});
                     table.ForeignKey(
-                        name: "FK_UserBadges_Badges_BadgeId",
-                        column: x => x.BadgeId,
-                        principalTable: "Badges",
-                        principalColumn: "Id",
+                        "FK_UserBadges_Badges_BadgeId",
+                        x => x.BadgeId,
+                        "Badges",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBadges_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_UserBadges_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventBadges",
-                columns: table => new
+                "EventBadges",
+                table => new
                 {
                     BadgeId = table.Column<int>(nullable: false),
                     EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventBadges", x => new { x.BadgeId, x.EventId });
+                    table.PrimaryKey("PK_EventBadges", x => new {x.BadgeId, x.EventId});
                     table.ForeignKey(
-                        name: "FK_EventBadges_Badges_BadgeId",
-                        column: x => x.BadgeId,
-                        principalTable: "Badges",
-                        principalColumn: "Id",
+                        "FK_EventBadges_Badges_BadgeId",
+                        x => x.BadgeId,
+                        "Badges",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventBadges_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "Id",
+                        "FK_EventBadges_Events_EventId",
+                        x => x.EventId,
+                        "Events",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventRegistrations",
-                columns: table => new
+                "EventRegistrations",
+                table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     EventId = table.Column<int>(nullable: false),
@@ -366,158 +366,158 @@ namespace MakersOfDenmark.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventRegistrations", x => new { x.UserId, x.EventId });
+                    table.PrimaryKey("PK_EventRegistrations", x => new {x.UserId, x.EventId});
                     table.ForeignKey(
-                        name: "FK_EventRegistrations_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "Id",
+                        "FK_EventRegistrations_Events_EventId",
+                        x => x.EventId,
+                        "Events",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventRegistrations_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_EventRegistrations_AspNetUsers_UserId",
+                        x => x.UserId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
+                "IX_AspNetRoleClaims_RoleId",
+                "AspNetRoleClaims",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
+                "RoleNameIndex",
+                "AspNetRoles",
+                "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
+                "IX_AspNetUserClaims_UserId",
+                "AspNetUserClaims",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
+                "IX_AspNetUserLogins_UserId",
+                "AspNetUserLogins",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
+                "IX_AspNetUserRoles_RoleId",
+                "AspNetUserRoles",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AddressId",
-                table: "AspNetUsers",
-                column: "AddressId");
+                "IX_AspNetUsers_AddressId",
+                "AspNetUsers",
+                "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
+                "EmailIndex",
+                "AspNetUsers",
+                "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
+                "UserNameIndex",
+                "AspNetUsers",
+                "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Badges_IssuerId",
-                table: "Badges",
-                column: "IssuerId");
+                "IX_Badges_IssuerId",
+                "Badges",
+                "IssuerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventBadges_EventId",
-                table: "EventBadges",
-                column: "EventId");
+                "IX_EventBadges_EventId",
+                "EventBadges",
+                "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventRegistrations_EventId",
-                table: "EventRegistrations",
-                column: "EventId");
+                "IX_EventRegistrations_EventId",
+                "EventRegistrations",
+                "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_MakerspaceId",
-                table: "Events",
-                column: "MakerspaceId");
+                "IX_Events_MakerspaceId",
+                "Events",
+                "MakerspaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MakerspaceBadges_MakerspaceId",
-                table: "MakerspaceBadges",
-                column: "MakerspaceId");
+                "IX_MakerspaceBadges_MakerspaceId",
+                "MakerspaceBadges",
+                "MakerspaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Makerspaces_AddressId",
-                table: "Makerspaces",
-                column: "AddressId");
+                "IX_Makerspaces_AddressId",
+                "Makerspaces",
+                "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Makerspaces_OwnerId",
-                table: "Makerspaces",
-                column: "OwnerId");
+                "IX_Makerspaces_OwnerId",
+                "Makerspaces",
+                "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MakerspaceUsers_MakerspaceId",
-                table: "MakerspaceUsers",
-                column: "MakerspaceId");
+                "IX_MakerspaceUsers_MakerspaceId",
+                "MakerspaceUsers",
+                "MakerspaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBadges_UserId",
-                table: "UserBadges",
-                column: "UserId");
+                "IX_UserBadges_UserId",
+                "UserBadges",
+                "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                "AspNetUserClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                "AspNetUserLogins");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                "AspNetUserRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "EventBadges");
+                "EventBadges");
 
             migrationBuilder.DropTable(
-                name: "EventRegistrations");
+                "EventRegistrations");
 
             migrationBuilder.DropTable(
-                name: "MakerspaceBadges");
+                "MakerspaceBadges");
 
             migrationBuilder.DropTable(
-                name: "MakerspaceUsers");
+                "MakerspaceUsers");
 
             migrationBuilder.DropTable(
-                name: "UserBadges");
+                "UserBadges");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                "Events");
 
             migrationBuilder.DropTable(
-                name: "Badges");
+                "Badges");
 
             migrationBuilder.DropTable(
-                name: "Makerspaces");
+                "Makerspaces");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                "Addresses");
         }
     }
 }

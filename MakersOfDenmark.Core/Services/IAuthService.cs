@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MakersOfDenmark.Core.Models.Auth;
 

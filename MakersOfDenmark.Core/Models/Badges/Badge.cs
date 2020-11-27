@@ -17,10 +17,10 @@ namespace MakersOfDenmark.Core.Models.Badges
 
         public int IssuerId { get; set; }
         public Makerspace Issuer { get; set; }
-        
+
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
         public IList<EventBadge> EventBadges { get; set; }
-        
+
         public IList<UserBadge> UserBadges { get; set; }
     }
 }

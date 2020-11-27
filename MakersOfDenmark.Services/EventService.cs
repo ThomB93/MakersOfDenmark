@@ -84,7 +84,7 @@ namespace MakersOfDenmark.Services
 
             return currentEvent;
         }
-        
+
         public IEnumerable<Event> UpcomingEvents()
         {
             var eventsFound = _unitOfWork.Events.Find(e => e.StartDateTime > DateTime.Now);
@@ -101,13 +101,13 @@ namespace MakersOfDenmark.Services
 
             return eventRegistrationsFound.Select(eventRegistration => eventRegistration.Event).ToList();
         }
-        
+
         public IEnumerable<Event> HistoricEvents()
         {
             var eventsFound = _unitOfWork.Events.Find(e => e.StartDateTime < DateTime.Now);
             return eventsFound;
         }
-        
+
         public async Task<IEnumerable<Event>> HistoricEventsUserAttended(Guid userId)
         {
             var eventsFound = await _unitOfWork.Events.GetAllAsync();

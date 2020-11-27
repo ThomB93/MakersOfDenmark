@@ -4,6 +4,5 @@ namespace MakersOfDenmark.Core.Repositories
 {
     public interface IBadgeRepository : IRepository<Badge>
     {
-        
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using MakersOfDenmark.Core.Models.UserRelations;
+﻿using MakersOfDenmark.Core.Models.UserRelations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +9,7 @@ namespace MakersOfDenmark.Data.Configurations
         public void Configure(EntityTypeBuilder<UserBadge> builder)
         {
             builder.HasKey(ub => new {ub.BadgeId, ub.UserId});
-            
+
             builder
                 .HasOne(ub => ub.Badge)
                 .WithMany(b => b.UserBadges)

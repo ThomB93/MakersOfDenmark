@@ -1,6 +1,5 @@
 ﻿using MakersOfDenmark.Core.Models.Badges;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MakersOfDenmark.Data.Configurations
@@ -25,7 +24,7 @@ namespace MakersOfDenmark.Data.Configurations
 
             builder.HasOne(a => a.Issuer)
                 .WithMany(a => a.Badges)
-                .HasForeignKey(a =>a.IssuerId);
+                .HasForeignKey(a => a.IssuerId);
         }
     }
 }

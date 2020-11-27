@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MakersOfDenmark.Core.Models.Events;
-using MakersOfDenmark.Core.Models.Makerspaces;
 
 namespace MakersOfDenmark.Api.Resources
 {

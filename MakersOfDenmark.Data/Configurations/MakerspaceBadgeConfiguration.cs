@@ -9,7 +9,7 @@ namespace MakersOfDenmark.Data.Configurations
         public void Configure(EntityTypeBuilder<MakerspaceBadge> builder)
         {
             builder.HasKey(mb => new {mb.BadgeId, mb.MakerspaceId});
-            
+
             builder
                 .HasOne(mb => mb.Badge)
                 .WithMany(b => b.MakerspaceBadges)
@@ -19,8 +19,6 @@ namespace MakersOfDenmark.Data.Configurations
                 .HasOne(mb => mb.Makerspaces)
                 .WithMany(m => m.MakerspaceBadges)
                 .HasForeignKey(mb => mb.MakerspaceId);
-            
-            
         }
     }
 }
