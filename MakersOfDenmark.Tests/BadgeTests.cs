@@ -27,8 +27,8 @@ namespace MakersOfDenmark.Tests
             return mgr;
         }
 
-        private List<User> _users;
-        private Guid _userId;
+        private readonly List<User> _users;
+        private readonly Guid _userId;
 
         public BadgeTests()
         {

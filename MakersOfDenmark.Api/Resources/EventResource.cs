@@ -14,5 +14,6 @@ namespace MakersOfDenmark.Api.Resources
         public MakerspaceResource? MakerspaceHost { get; set; }
         public IList<BadgeResource>? EventBadges { get; set; }
         public IList<UserResource>? RegisteredUsers { get; set; }
+        public int MaximumParticipants { get; set; }
     }
 }

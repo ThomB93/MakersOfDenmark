@@ -16,5 +16,6 @@ namespace MakersOfDenmark.Core.Models.Events
         public Makerspace MakerspaceHost { get; set; }
         public IList<EventBadge> EventBadges { get; set; }
         public IList<EventRegistration> RegisteredUsers { get; set; }
+        public int MaximumParticipants { get; set; }
     }
 }

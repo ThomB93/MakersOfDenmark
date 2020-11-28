@@ -42,17 +42,21 @@ namespace MakersOfDenmark.Services
             var eventFound = await _unitOfWork.Events.GetByIdAsync(eventId);
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
 
-            eventFound.RegisteredUsers.Add(new EventRegistration
+            if (eventFound.RegisteredUsers.Count <= eventFound.MaximumParticipants)
             {
-                UserId = userId,
-                User = user,
-                EventId = eventId,
-                Event = eventFound,
-                DateOfRegistration = DateTime.Now,
-                HasAttended = false
-            });
+                eventFound.RegisteredUsers.Add(new EventRegistration
+                {
+                    UserId = userId,
+                    User = user,
+                    EventId = eventId,
+                    Event = eventFound,
+                    DateOfRegistration = DateTime.Now,
+                    HasAttended = false
+                });
 
-            await _unitOfWork.CommitAsync();
+                await _unitOfWork.CommitAsync();
+            }
+            
 
             return user != null;
         }
@@ -79,6 +83,7 @@ namespace MakersOfDenmark.Services
             currentEvent.MakerspaceHost = updatedEvent.MakerspaceHost;
             currentEvent.EndDateTime = updatedEvent.EndDateTime;
             currentEvent.StartDateTime = updatedEvent.StartDateTime;
+            currentEvent.MaximumParticipants = updatedEvent.MaximumParticipants;
 
             await _unitOfWork.CommitAsync();
 
