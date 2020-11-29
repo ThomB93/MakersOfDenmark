@@ -6,6 +6,7 @@ using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
 using MakersOfDenmark.Core.Models.Events;
 using MakersOfDenmark.Core.Models.Makerspaces;
+using MakersOfDenmark.Core.Models.UserRelations;
 
 namespace MakersOfDenmark.Api.Mapping
 {
@@ -23,6 +24,8 @@ namespace MakersOfDenmark.Api.Mapping
             CreateMap<SaveBadgeResource, Badge>();
             CreateMap<SaveAddressResource, Address>();
             CreateMap<SaveEventResource, Event>();
+            CreateMap<EventRegistrationResource, EventRegistration>();
+            CreateMap<UserBadgeResource, UserBadge>();
 
             //Domain to Resource mappings - used when getting data
             CreateMap<Makerspace, MakerspaceResource>();

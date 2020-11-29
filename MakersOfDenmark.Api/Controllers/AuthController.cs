@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MakersOfDenmark.Api.Controllers
 {
+    /// <summary>Contains REST endpoints for managing users and roles.</summary>
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase

@@ -8,5 +8,6 @@ namespace MakersOfDenmark.Core.Services
     {
         Task<Badge> CreateBadge(Badge newBadge);
         Badge AddBadgeToUser(Guid userId, Badge badgeToAdd);
+        bool RemoveBadgeFromUser(Guid userId, Badge badgeToAdd);
     }
 }

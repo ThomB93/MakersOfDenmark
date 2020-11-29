@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Data;
 using Microsoft.AspNetCore.Builder;
@@ -49,7 +52,10 @@ namespace MakersOfDenmark.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MakersOfDenmarkApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Document for Makers of Denmark API", Description = "Shows REST endpoints for interacting with the API", Version = "v1" });
+                var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var filePath = Path.Combine(AppContext.BaseDirectory, fileName);
+                c.IncludeXmlComments(filePath, true);
             });
 
             services.AddAutoMapper(typeof(Startup));
