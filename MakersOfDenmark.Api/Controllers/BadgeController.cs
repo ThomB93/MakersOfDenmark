@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using MakersOfDenmark.Api.Resources;
 using MakersOfDenmark.Core.Models.Badges;
@@ -6,9 +7,12 @@ using MakersOfDenmark.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MakersOfDenmark.Api.Controllers
+
 {
+    /// <summary>Contains REST endpoints for interacting with the Badge domain.</summary>
     [ApiController]
     [Route("[controller]")]
+    
     public class BadgeController : ControllerBase
     {
         private readonly IBadgeService _badgeService;
@@ -27,6 +31,21 @@ namespace MakersOfDenmark.Api.Controllers
             var createdBadge = await _badgeService.CreateBadge(badgeToCreate);
             var badgeToReturn = _mapper.Map<Badge, BadgeResource>(createdBadge);
             return Ok(badgeToReturn);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<ActionResult<UserBadgeResource>> AddBadgeToUser(Guid userId, [FromBody] BadgeResource badgeToAddResource)
+        {
+            var badgeToAdd = _mapper.Map<BadgeResource, Badge>(badgeToAddResource);
+            try
+            {
+                var badgeAddedToUser = _badgeService.AddBadgeToUser(userId, badgeToAdd);
+                return Ok(badgeAddedToUser);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
         }
     }
 }

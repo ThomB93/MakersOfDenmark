@@ -28,6 +28,20 @@ namespace MakersOfDenmark.Services
 
             return newBadge;
         }
+        
+        public bool RemoveBadgeFromUser(Guid userId, Badge badge)
+        {
+            //find the user
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            //find the badge on the user
+            var userBadgeToRemove = user?.UserBadges.FirstOrDefault(ub => ub.UserId == user.Id && ub.BadgeId == badge.Id);
+            //remove the user badge if both were found
+            if (user != null && userBadgeToRemove != null)
+            {
+                return user.UserBadges.Remove(userBadgeToRemove);
+            }
+            return false;
+        }
 
         public Badge AddBadgeToUser(Guid userId, Badge badge)
         {

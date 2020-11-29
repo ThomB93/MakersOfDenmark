@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MakersOfDenmark.Api.Controllers
 {
+    /// <summary>Contains REST endpoints for interacting with the Events domain.</summary>
     [ApiController]
     [Route("[controller]")]
     public class EventController : ControllerBase

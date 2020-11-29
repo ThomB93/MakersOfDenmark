@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Moq;
 using Xunit;
 
-namespace MakersOfDenmark.Tests
+namespace MakersOfDenmark.Tests.Repositories
 {
     public class BadgeTests
     {
@@ -27,8 +27,9 @@ namespace MakersOfDenmark.Tests
             return mgr;
         }
 
-        private readonly List<User> _users;
-        private readonly Guid _userId;
+        private List<User> _users;
+        private Guid _userId;
+        private Badge testBadge;
 
         public BadgeTests()
         {
@@ -37,18 +38,18 @@ namespace MakersOfDenmark.Tests
             {
                 new User {Id = _userId, FirstName = "Mads", LastName = "Test", UserBadges = new List<UserBadge>()}
             };
-        }
-
-        [Fact]
-        public async void ServiceShouldAddBadgeToUser()
-        {
-            var badgeToAdd = new Badge
+            
+            testBadge = new Badge
             {
                 Id = 1,
                 Name = "Test",
                 Description = "Test"
             };
+        }
 
+        [Fact]
+        public async void ServiceShouldAddBadgeToUser()
+        {
             Guid guid = new Guid();
 
             var badgeRepositoryMock = new Mock<IBadgeRepository>();
@@ -60,10 +61,56 @@ namespace MakersOfDenmark.Tests
             BadgeService badgeService = new BadgeService(mockUnitOfWork.Object, userManagerMock.Object);
 
             //Act
-            var badgeAdded = badgeService.AddBadgeToUser(_userId, badgeToAdd);
+            var badgeAdded = badgeService.AddBadgeToUser(_userId, testBadge);
 
             //Assert
-            badgeAdded.Should().Equals(badgeToAdd);
+            badgeAdded.Should().Equals(testBadge);
+        }
+
+        [Fact]
+        public async void ServiceShouldRemoveBadgeFromUser()
+        {
+            //arrange
+            var badgeRepositoryMock = new Mock<IBadgeRepository>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            
+            var userManagerMock = MockUserManager<User>();
+            userManagerMock.Setup(um => um.Users).Returns(_users.AsQueryable);
+            
+            BadgeService badgeService = new BadgeService(mockUnitOfWork.Object, userManagerMock.Object);
+            
+            var badgeToRemove = badgeService.AddBadgeToUser(_userId, testBadge);
+            //act
+            var isRemoved = badgeService.RemoveBadgeFromUser(_userId, badgeToRemove);
+            //assert
+            isRemoved.Should().BeTrue();
+        }
+
+        [Fact]
+        public async void ServiceShouldSaveNewBadge()
+        {
+            //arrange
+            Badge dummyBadge = new Badge {Id = 1};
+
+            var mockBadgeRepository = new Mock<IBadgeRepository>();
+            mockBadgeRepository.Setup(ms => ms.AddAsync(It.IsAny<Badge>()));
+            
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(_ => _.Badges).Returns(mockBadgeRepository.Object);
+            
+            var userManagerMock = MockUserManager<User>();
+            userManagerMock.Setup(um => um.Users).Returns(_users.AsQueryable);
+            
+            BadgeService BadgeService = new BadgeService(mockUnitOfWork.Object, userManagerMock.Object);
+
+            //act
+            var BadgeSaved = BadgeService.CreateBadge(dummyBadge).Result;
+            
+            BadgeSaved.Should().NotBeNull();
+            BadgeSaved.Should().Be(dummyBadge, because: "the Badge that was saved should be returned by the service.");
+            
+            mockBadgeRepository.Verify(_ => _.AddAsync(It.IsAny<Badge>()), Times.Once);
+            mockUnitOfWork.Verify(_ => _.CommitAsync(), Times.Once());
         }
     }
 }
