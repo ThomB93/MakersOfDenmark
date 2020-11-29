@@ -24,6 +24,8 @@ namespace MakersOfDenmark.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>This POST method creates a new badge.</summary>
+        /// <returns>The badge that was created.</returns>
         [HttpPost]
         public async Task<ActionResult<BadgeResource>> CreateBadge(SaveBadgeResource badge)
         {
@@ -33,7 +35,9 @@ namespace MakersOfDenmark.Api.Controllers
             return Ok(badgeToReturn);
         }
 
-        [HttpPost("{id}")]
+        /// <summary>This POST method adds an existing badge to a user.</summary>
+        /// <returns>Ok if the badge was added successfully, NotFound otherwise.</returns>
+        [HttpPost("{userId}")]
         public async Task<ActionResult<UserBadgeResource>> AddBadgeToUser(Guid userId, [FromBody] BadgeResource badgeToAddResource)
         {
             var badgeToAdd = _mapper.Map<BadgeResource, Badge>(badgeToAddResource);
