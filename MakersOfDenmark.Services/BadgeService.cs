@@ -28,7 +28,7 @@ namespace MakersOfDenmark.Services
 
             return newBadge;
         }
-        
+
         public bool RemoveBadgeFromUser(Guid userId, Badge badge)
         {
             //find the user
