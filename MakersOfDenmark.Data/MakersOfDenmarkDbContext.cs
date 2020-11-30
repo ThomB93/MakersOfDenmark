@@ -8,12 +8,16 @@ using MakersOfDenmark.Core.Models.UserRelations;
 using MakersOfDenmark.Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MakersOfDenmark.Data
 {
     public class MakersOfDenmarkDbContext : IdentityDbContext<User, Role, Guid>
     {
+        public MakersOfDenmarkDbContext(DbContextOptions<MakersOfDenmarkDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Makerspace> Makerspaces { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Badge> Badges { get; set; }
@@ -23,11 +27,6 @@ namespace MakersOfDenmark.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<EventRegistration> EventRegistrations { get; set; }
         public DbSet<EventBadge> EventBadges { get; set; }
-
-        public MakersOfDenmarkDbContext(DbContextOptions<MakersOfDenmarkDbContext> options)
-            : base(options)
-        {
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -48,11 +47,10 @@ namespace MakersOfDenmark.Data
                 .ApplyConfiguration(new EventConfiguration());
             builder
                 .ApplyConfiguration(new EventBadgeConfiguration());
+            builder
+                .ApplyConfiguration(new EventRegistrationConfiguration());
 
             base.OnModelCreating(builder);
-
         }
     }
-
-
 }

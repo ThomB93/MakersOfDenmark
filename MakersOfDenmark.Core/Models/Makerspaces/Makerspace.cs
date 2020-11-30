@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Models.Badges;
 using MakersOfDenmark.Core.Models.Events;
@@ -21,10 +20,10 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
 
         public User Owner { get; set; }
         public Guid OwnerId { get; set; }
-        
+
         public IList<MakerspaceBadge> MakerspaceBadges { get; set; }
         public IList<MakerspaceUser> MakerspaceUsers { get; set; }
-        
+
         public IList<Badge> Badges { get; set; }
         public IList<Event> Events { get; set; }
 
@@ -33,7 +32,5 @@ namespace MakersOfDenmark.Core.Models.Makerspaces
         public Address Address { get; set; }
         //[ForeignKey("User")] 
         //public Guid UserFK { get; set; }
-
-        
     }
 }

@@ -14,8 +14,9 @@ namespace MakersOfDenmark.Data.Repositories
 
         public Repository(DbContext context)
         {
-            this.Context = context;
+            Context = context;
         }
+
         public async Task AddAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity);
@@ -33,7 +34,7 @@ namespace MakersOfDenmark.Data.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return  await Context.Set<TEntity>().ToListAsync();
+            return await Context.Set<TEntity>().ToListAsync();
         }
 
         public ValueTask<TEntity> GetByIdAsync(int id)

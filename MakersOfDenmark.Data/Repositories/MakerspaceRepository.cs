@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MakersOfDenmark.Core.Models.Makerspaces;
 using MakersOfDenmark.Core.Repositories;
@@ -10,17 +8,12 @@ namespace MakersOfDenmark.Data.Repositories
 {
     public class MakerspaceRepository : Repository<Makerspace>, IMakerspaceRepository
     {
-
-        private MakersOfDenmarkDbContext MakersOfDenmarkDbContext
-        {
-            get { return Context as MakersOfDenmarkDbContext; }
-        }
-        
         public MakerspaceRepository(MakersOfDenmarkDbContext context) : base(context)
         {
-            
         }
-        
+
+        private MakersOfDenmarkDbContext MakersOfDenmarkDbContext => Context as MakersOfDenmarkDbContext;
+
         public async Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner()
         {
             return await MakersOfDenmarkDbContext.Makerspaces
@@ -28,15 +21,15 @@ namespace MakersOfDenmark.Data.Repositories
                 .Include(m => m.Address)
                 .Include(m => m.MakerspaceBadges).ThenInclude(b => b.Badge).ToListAsync();
         }
+
         public async Task<Makerspace> GetMakerspaceWithOwnerById(int id)
         {
             return await MakersOfDenmarkDbContext.Makerspaces
                 .Include(m => m.Owner)
                 .Include(m => m.Address)
-                
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
-        
+
         /*var query = context.Customers
             .Join(
                 context.Invoices,
@@ -49,7 +42,7 @@ namespace MakersOfDenmark.Data.Repositories
                     InvoiceDate = invoice.Date
                 }
             ).ToList();*/
-        
+
         //Standard repository functionality does not need to be overwritten
 
         /*public IEnumerable<Makerspace> GetAllMakerspaces()
@@ -85,7 +78,5 @@ namespace MakersOfDenmark.Data.Repositories
         {
             return MakersOfDenmarkDbContext.Makerspaces.Find(id);
         }*/
-
-        
     }
 }

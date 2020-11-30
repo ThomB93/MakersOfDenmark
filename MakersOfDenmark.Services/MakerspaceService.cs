@@ -13,8 +13,9 @@ namespace MakersOfDenmark.Services
 
         public MakerspaceService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
+
         public Task<IEnumerable<Makerspace>> GetAllMakerspacesWithOwner()
         {
             return _unitOfWork.Makerspaces.GetAllMakerspacesWithOwner();
@@ -29,8 +30,8 @@ namespace MakersOfDenmark.Services
         {
             await _unitOfWork.Makerspaces
                 .AddAsync(newMakerspace);
-            await _unitOfWork.CommitAsync();                    
-            
+            await _unitOfWork.CommitAsync();
+
             return newMakerspace;
         }
 
@@ -44,7 +45,7 @@ namespace MakersOfDenmark.Services
             //TODO: Add updates for new properties
 
             await _unitOfWork.CommitAsync();
-            
+
             return makerspaceToBeUpdated;
         }
 

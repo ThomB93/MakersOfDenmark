@@ -1,13 +1,4 @@
-﻿using System;
-using System.Linq;
-using MakersOfDenmark.Core.Models.Auth;
-using MakersOfDenmark.Core.Models.Makerspaces;
-using MakersOfDenmark.Data;
-using MakersOfDenmark.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace MakersOfDenmark.Tests.Authentication
+﻿namespace MakersOfDenmark.Tests.Authentication
 {
     public class MakerspaceAuthenticationTests
     {

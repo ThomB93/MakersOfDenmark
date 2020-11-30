@@ -26,11 +26,9 @@ namespace MakersOfDenmark.Data.Configurations
                 .HasOne(mb => mb.Address)
                 .WithMany(ad => ad.Makerspaces)
                 .HasForeignKey(mb => mb.AddressId);
-            
+
             builder
                 .ToTable("Makerspaces");
-            
-            
         }
     }
 }

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Moq;
 using Xunit;
 
-namespace MakersOfDenmark.Tests.Repositories
+namespace MakersOfDenmark.Tests
 {
     public class BadgeTests
     {
@@ -27,8 +27,8 @@ namespace MakersOfDenmark.Tests.Repositories
             return mgr;
         }
 
-        private List<User> _users;
-        private Guid _userId;
+        private readonly List<User> _users;
+        private readonly Guid _userId;
 
         public BadgeTests()
         {

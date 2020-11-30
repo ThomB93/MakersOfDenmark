@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using MakersOfDenmark.Core.Models.Auth;
-using MakersOfDenmark.Core.Models.Badges;
 using MakersOfDenmark.Core.Models.Makerspaces;
 
 namespace MakersOfDenmark.Core.Models.Events
@@ -19,5 +16,6 @@ namespace MakersOfDenmark.Core.Models.Events
         public Makerspace MakerspaceHost { get; set; }
         public IList<EventBadge> EventBadges { get; set; }
         public IList<EventRegistration> RegisteredUsers { get; set; }
+        public int MaximumParticipants { get; set; }
     }
 }

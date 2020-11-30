@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MakersOfDenmark.Core.Models.Badges;
+﻿using MakersOfDenmark.Core.Models.Badges;
 
 namespace MakersOfDenmark.Core.Models.Events
 {

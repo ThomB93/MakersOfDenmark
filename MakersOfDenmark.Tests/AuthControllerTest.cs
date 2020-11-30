@@ -1,23 +1,14 @@
 using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+using System.Threading;
+using AutoMapper;
+using MakersOfDenmark.Api.Controllers;
+using MakersOfDenmark.Api.Resources;
+using MakersOfDenmark.Core.Models.Auth;
+using MakersOfDenmark.Core.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
-using MakersOfDenmark.Services;
-using MakersOfDenmark.Services.Settings;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using MakersOfDenmark.Core.Models.Auth;
-using System.Collections.Generic;
-using System.Threading;
-using MakersOfDenmark.Api.Resources;
-using MakersOfDenmark.Api.Controllers;
-using AutoMapper;
-using MakersOfDenmark.Core.Services;
-using Microsoft.AspNetCore.Identity;
 
 namespace MakersOfDenmark.Tests
 {
@@ -26,12 +17,13 @@ namespace MakersOfDenmark.Tests
         private readonly AuthController _controller;
 
         private readonly Guid _userGuid;
+
         public AuthControllerTest()
         {
             // Mocking all the shit
             var loggerMock = new Mock<ILogger<AuthController>>();
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(x => x.Map<UserSignUpResource, User>(It.IsAny<UserSignUpResource>())).Returns(new User()
+            mapperMock.Setup(x => x.Map<UserSignUpResource, User>(It.IsAny<UserSignUpResource>())).Returns(new User
             {
                 UserName = "test@testesen.dk",
                 Id = _userGuid,
@@ -40,7 +32,7 @@ namespace MakersOfDenmark.Tests
             _userGuid = new Guid();
             var userStore = new Mock<IUserPasswordStore<User>>();
             userStore.Setup(x => x.FindByIdAsync(_userGuid.ToString(), CancellationToken.None))
-                .ReturnsAsync(new User()
+                .ReturnsAsync(new User
                 {
                     UserName = "test@testesen.dk",
                     Id = _userGuid,
@@ -51,16 +43,17 @@ namespace MakersOfDenmark.Tests
 
             var roleStore = new Mock<IRoleStore<Role>>();
             roleStore.Setup(x => x.FindByNameAsync("admin", CancellationToken.None))
-            .ReturnsAsync(new Role()
-            {
-                Name = "admin"
-            });
+                .ReturnsAsync(new Role
+                {
+                    Name = "admin"
+                });
             var roleManagerMock = new Mock<RoleManager<Role>>();
             var userManagerMock = new Mock<UserManager<User>>();
             var authServiceMock = new Mock<IAuthService>();
-            
+
             //produces an error
-            _controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock.Object, roleManagerMock.Object, authServiceMock.Object);
+            _controller = new AuthController(loggerMock.Object, mapperMock.Object, userManagerMock.Object,
+                roleManagerMock.Object, authServiceMock.Object);
         }
 
         [Fact]
@@ -81,8 +74,6 @@ namespace MakersOfDenmark.Tests
             // Assert
             Assert.NotNull(result);
             Assert.Equal(_controller.Created(string.Empty, string.Empty), result);
-
         }
-
     }
 }

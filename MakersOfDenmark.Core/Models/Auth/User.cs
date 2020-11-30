@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using MakersOfDenmark.Core.Models.Events;
 using MakersOfDenmark.Core.Models.Makerspaces;
 using MakersOfDenmark.Core.Models.UserRelations;
