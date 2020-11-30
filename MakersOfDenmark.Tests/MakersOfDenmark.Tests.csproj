@@ -33,8 +33,4 @@
       <ProjectReference Include="..\MakersOfDenmark.Services\MakersOfDenmark.Services.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Repositories" />
-    </ItemGroup>
-
 </Project>
