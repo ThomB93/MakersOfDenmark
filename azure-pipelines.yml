@@ -36,7 +36,6 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    version: 3.1.403
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration)'
@@ -58,4 +57,4 @@ steps:
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     enableCustomDeployment: true
     DeploymentType: 'webDeploy'
-    TakeAppOfflineFlag: false
+    TakeAppOfflineFlag: True
