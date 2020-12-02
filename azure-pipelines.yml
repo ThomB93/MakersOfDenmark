@@ -36,6 +36,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
+    version: 3.1.403
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration)'
