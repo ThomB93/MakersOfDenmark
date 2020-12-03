@@ -469,3 +469,4 @@ Desktop.ini
 .DS_Store
 appsettings.json
 appsettings.Development.json
+.vscode
