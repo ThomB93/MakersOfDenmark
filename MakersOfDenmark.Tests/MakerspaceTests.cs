@@ -167,5 +167,6 @@ namespace MakersOfDenmark.Tests
             mockMakerspaceRepository.Verify(_ => _.Remove(It.IsAny<Makerspace>()), Times.Once);
             mockUnitOfWork.Verify(_ => _.CommitAsync(), Times.Once);
         }
+        
     }
 }
