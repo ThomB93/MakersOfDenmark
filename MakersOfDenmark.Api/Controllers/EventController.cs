@@ -123,12 +123,8 @@ namespace MakersOfDenmark.Api.Controllers
 
             return Ok(updatedEventResource);
         }
-
-<<<<<<< HEAD
+        
         [HttpGet("/upcoming")]
-=======
-        [HttpGet("upcoming")]
->>>>>>> 3a1186965379bf795fd1505512c0f719b0a81d38
         public ActionResult<IEnumerable<Event>> UpcomingEvents()
         {
             var eventFound = _eventService.UpcomingEvents();
@@ -136,12 +132,8 @@ namespace MakersOfDenmark.Api.Controllers
             return Ok(eventResource);
         }
 
-
-<<<<<<< HEAD
+        
         [HttpGet("/upcoming/{userId}")]
-=======
-        [HttpGet("/{userId}")]
->>>>>>> 3a1186965379bf795fd1505512c0f719b0a81d38
         public async Task<ActionResult<Event>> UpcomingEventsForuser(Guid userId)
         {
             var eventsFound = await _eventService.UpcomingEventsForUser(userId);
@@ -150,12 +142,8 @@ namespace MakersOfDenmark.Api.Controllers
             return Ok(eventsFoundResources);
         }
 
-
-<<<<<<< HEAD
+        
         [HttpGet("/historic/{userId}")]
-=======
-        [HttpGet("/{userId}")]
->>>>>>> 3a1186965379bf795fd1505512c0f719b0a81d38
         public async Task<ActionResult<Event>> HistoricEventsUserAttended(Guid userId)
         {
             var eventsFound = await _eventService.HistoricEventsUserAttended(userId);
