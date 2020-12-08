@@ -3,6 +3,7 @@ using System.Threading;
 using AutoMapper;
 using MakersOfDenmark.Api.Controllers;
 using MakersOfDenmark.Api.Resources;
+using MakersOfDenmark.Core.Models;
 using MakersOfDenmark.Core.Models.Auth;
 using MakersOfDenmark.Core.Services;
 using Microsoft.AspNetCore.Identity;
@@ -65,7 +66,15 @@ namespace MakersOfDenmark.Tests
                 Email = "test@test.com",
                 FirstName = "Thomas",
                 LastName = "Test",
-                Password = "1234Abc!"
+                Password = "1234Abc!",
+                Address = new SaveAddressResource()
+                {
+                    City = "Vejle",
+                    Zipcode = "7100",
+                    CountryCode = "dk",
+                    StreetName = "Paradisæblevej",
+                    StreetNumber = "13"
+                }
             };
 
             // Act

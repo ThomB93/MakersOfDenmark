@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.5" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.4.243" />
 
     
@@ -26,6 +27,10 @@
   <ItemGroup>
     <Folder Include="Drivers\" />
     <Folder Include="Hooks\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MakersOfDenmark.Services\MakersOfDenmark.Services.csproj" />
   </ItemGroup>
 
 </Project>
