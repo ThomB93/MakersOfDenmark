@@ -1,3 +1,5 @@
+using MakersOfDenmark.Core.Models;
+
 namespace MakersOfDenmark.Api.Resources
 {
     public class UserSignUpResource
@@ -9,5 +11,6 @@ namespace MakersOfDenmark.Api.Resources
         public string? LastName { get; set; }
 
         public string? Password { get; set; }
+        public SaveAddressResource? Address { get; set; }
     }
 }

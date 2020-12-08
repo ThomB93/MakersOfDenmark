@@ -16,7 +16,7 @@ namespace MakersOfDenmark.Core.Models.Auth
         public IList<MakerspaceUser> MakerspacesJoined { get; set; }
         public IList<EventRegistration> EventsRegisteredFor { get; set; }
 
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
+        public int? AddressId { get; set; }
+        public Address? Address { get; set; }
     }
 }

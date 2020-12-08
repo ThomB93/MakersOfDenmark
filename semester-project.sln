@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Api", "MakersOfDenmark.Api\MakersOfDenmark.Api.csproj", "{C95517CB-C316-4B14-B6C4-1BC8DB831A8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakersOfDenmark.Api", "MakersOfDenmark.Api\MakersOfDenmark.Api.csproj", "{C95517CB-C316-4B14-B6C4-1BC8DB831A8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Tests", "MakersOfDenmark.Tests\MakersOfDenmark.Tests.csproj", "{28F5616B-151E-4B17-A89A-C4FB975091B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakersOfDenmark.Tests", "MakersOfDenmark.Tests\MakersOfDenmark.Tests.csproj", "{28F5616B-151E-4B17-A89A-C4FB975091B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Core", "MakersOfDenmark.Core\MakersOfDenmark.Core.csproj", "{333EAC88-84A9-42C0-BFFF-C37494145B22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakersOfDenmark.Core", "MakersOfDenmark.Core\MakersOfDenmark.Core.csproj", "{333EAC88-84A9-42C0-BFFF-C37494145B22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Data", "MakersOfDenmark.Data\MakersOfDenmark.Data.csproj", "{3B6655E8-BCE6-4490-8C81-EB3BC35FB5E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakersOfDenmark.Data", "MakersOfDenmark.Data\MakersOfDenmark.Data.csproj", "{3B6655E8-BCE6-4490-8C81-EB3BC35FB5E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.Services", "MakersOfDenmark.Services\MakersOfDenmark.Services.csproj", "{664BAECE-7EC3-42DB-9227-66A6D99A7F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakersOfDenmark.Services", "MakersOfDenmark.Services\MakersOfDenmark.Services.csproj", "{664BAECE-7EC3-42DB-9227-66A6D99A7F8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakersOfDenmark.BDD", "MakersOfDenmark.BDD\MakersOfDenmark.BDD.csproj", "{0CD0D0AF-2079-40E8-8A97-D69608729281}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C95517CB-C316-4B14-B6C4-1BC8DB831A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +85,23 @@ Global
 		{664BAECE-7EC3-42DB-9227-66A6D99A7F8A}.Release|x64.Build.0 = Release|Any CPU
 		{664BAECE-7EC3-42DB-9227-66A6D99A7F8A}.Release|x86.ActiveCfg = Release|Any CPU
 		{664BAECE-7EC3-42DB-9227-66A6D99A7F8A}.Release|x86.Build.0 = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|x64.Build.0 = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Debug|x86.Build.0 = Debug|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|x64.ActiveCfg = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|x64.Build.0 = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CD0D0AF-2079-40E8-8A97-D69608729281}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D9C0905-3B66-4F89-AD15-902D93F82F8C}
 	EndGlobalSection
 EndGlobal

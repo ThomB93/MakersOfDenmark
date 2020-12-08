@@ -58,7 +58,7 @@ namespace MakersOfDenmark.Api.Controllers
             if (userSigninResult)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                return Ok(_authService.GenerateJwt(user, roles));
+                return Ok(new[]{ _authService.GenerateJwt(user, roles), user.Id.ToString() });
             }
 
             return BadRequest("Email or password is incorrect.");
