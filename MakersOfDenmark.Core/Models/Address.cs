@@ -6,7 +6,7 @@ namespace MakersOfDenmark.Core.Models
 {
     public class Address
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string StreetName { get; set; }
 
@@ -18,9 +18,9 @@ namespace MakersOfDenmark.Core.Models
 
         public string CountryCode { get; set; }
 
-        public IList<User> Users { get; set; }
+        public IList<User>? Users { get; set; }
 
-        public IList<Makerspace> Makerspaces { get; set; }
+        public IList<Makerspace>? Makerspaces { get; set; }
         //TODO: Add properties  for user collection
     }
 }
